@@ -3,344 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artist Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <title>Mikhail Gulin - Conceptual Artist | Curator | Actionist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
+            background-color: #f9f9f9;
             color: #333;
-            line-height: 1.6;
-        }
-        header, footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #333;
-            color: #fff;
-        }
-        nav a {
-            margin: 0 15px;
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-size: 1.2em;
-            transition: all 0.3s ease;
-            padding-bottom: 3px;
-            border-bottom: 2px solid transparent;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 400;
-        }
-        
-        nav a.active {
-            color: #fff;
-            border-bottom: 2px solid #fff;
-        }
-        
-        nav a:hover {
-            color: #fff;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
-        }
-        
-        .social-icon {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-        }
-        main {
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .gallery {
-            margin: 40px 0;
-        }
-        .gallery-grid {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
+            flex-direction: column;
+            align-items: center;
         }
-        .gallery img {
-            width: 100%;
-            max-width: 300px;
-            height: 300px;
-            object-fit: cover;
-            border: 2px solid #ccc;
-            border-radius: 4px;
-            transition: transform 0.3s ease;
-        }
-        .gallery img:hover {
-            transform: scale(1.02);
-        }
-        .articles {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        .articles ul {
-            padding: 0;
-            list-style: none;
-        }
-        .articles li {
-            margin-bottom: 15px;
-        }
-        .archive {
-            font-size: 0.9em;
-        }
-        .press-archive {
-            margin: 40px 0;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .press-archive h3 {
-            color: #444;
-            margin-bottom: 20px;
-        }
-        
-        .press-archive ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .press-archive li {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .press-archive .year {
-            font-weight: bold;
-            color: #666;
-            margin: 25px 0 15px;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 500;
-        }
-        
-        [x-cloak] {
-            display: none !important;
-        }
-        
-        .section-fade-enter {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        
-        .section-fade-enter-active {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 300ms, transform 300ms;
-        }
-        
-        .bio {
-            max-width: 800px;
-            margin: 40px auto;
-            line-height: 1.6;
-            padding: 0 20px;
-            display: flex;
-            gap: 40px;
-            align-items: flex-start;
-        }
-        
-        .bio-content {
-            flex: 1;
-        }
-        
-        .bio-portrait {
-            flex: 0 0 300px;
-            margin-top: 8px;
-        }
-        
-        .bio-portrait img {
-            width: 100%;
-            height: auto;
-            border-radius: 4px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        
-        .bio h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-        
-        .bio p {
-            margin-bottom: 1.2em;
-            font-weight: 300;
-            font-size: 1.1em;
-            line-height: 1.7;
-        }
-        
-        .section-title {
+        header {
             text-align: center;
-            margin: 40px 0 20px;
-            color: #333;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 500;
+            padding: 10px;
+        }
+        h1 {
             font-size: 2em;
-            letter-spacing: -0.01em;
+            margin: 0;
         }
-        
-        @media (max-width: 768px) {
-            .bio {
-                flex-direction: column;
-                gap: 30px;
+        h2 {
+            font-size: 1.3em;
+            font-weight: lighter;
+            color: #777;
+        }
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+        }
+        .profile img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        .bio {
+            max-width: 620px;
+            text-align: center;
+            padding: 0 20px;
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .links {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        .links a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            font-size: 2em;
+            transition: color 0.3s;
+        }
+        .links a:hover {
+            color: #007BFF; /* Change color on hover */
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
             }
-            
-            .bio-portrait {
-                flex: 0 0 auto;
-                width: 100%;
-                max-width: 300px;
-                margin: 0 auto;
-            }
-            
-            .gallery-grid {
-                padding: 10px;
-                gap: 15px;
-            }
-            
-            .gallery img {
-                max-width: 100%;
-                height: auto;
-            }
-            
-            nav a {
-                margin: 0 10px;
+            h2 {
                 font-size: 1em;
             }
-            
-            h1 {
-                font-size: 1.8em;
+            .profile img {
+                width: 120px;
+                height: 120px;
             }
-            
-            h2 {
-                font-size: 1.5em;
+            .links a {
+                font-size: 2em;
             }
-        }
-        
-        @media (max-width: 480px) {
-            header {
-                padding: 15px;
-            }
-            
-            nav a {
-                margin: 0 8px;
-            }
-            
-            .bio p {
-                font-size: 0.95em;
-            }
-            
-            .press-archive {
-                margin: 20px 0;
-                padding: 15px;
+            .bio {
+                font-size: 0.9em;
             }
         }
     </style>
 </head>
-<body x-data="{ 
-    activeSection: 'home',
-    showArchive: false,
-    toggleArchive() {
-        this.showArchive = !this.showArchive;
-        if (this.showArchive) {
-            this.$nextTick(() => {
-                document.getElementById('press-archive').scrollIntoView({ behavior: 'smooth' });
-            });
-        }
-    }
-}">
-    <header>
-        <h1>Sarah Chen</h1>
-        <nav>
-            <a href="#" @click.prevent="activeSection = 'home'" :class="{ 'active': activeSection === 'home' }">
-                <i class="fas fa-home"></i>
-            </a>
-            <a href="https://instagram.com/sarahchen.art" aria-label="Instagram">
-                <i class="fab fa-instagram social-icon"></i>
-            </a>
-            <a href="https://facebook.com/sarahchenartist" aria-label="Facebook">
-                <i class="fab fa-facebook social-icon"></i>
-            </a>
-            <a href="https://youtube.com/@sarahchen.art" aria-label="YouTube">
-                <i class="fab fa-youtube social-icon"></i>
-            </a>
-            <a href="#" @click.prevent="activeSection = 'contact'" :class="{ 'active': activeSection === 'contact' }">Contact</a>
-        </nav>
-    </header>
-    <main>
-        <section class="bio">
-            <div class="bio-content">
-                <h2>About the Artist</h2>
-                <p>Sarah Chen is a San Francisco-based mixed media artist whose work explores the intersection of traditional and digital art forms. Drawing from her background in both classical painting and digital design, she creates pieces that bridge the gap between conventional artistic practices and contemporary technological innovations.</p>
-                
-                <p>Born in Shanghai and raised in California, Chen's work is influenced by the urban landscapes of both cities, reflecting themes of cultural fusion, technological progress, and urban identity. Her recent series combines traditional oil painting techniques with digital projection and photography, creating immersive pieces that challenge the boundaries between physical and digital spaces.</p>
-                
-                <p>A graduate of the San Francisco Art Institute, Chen has exhibited her work in galleries across the United States and Asia. Her innovative approach to mixing media has earned her recognition in both traditional art circles and digital art communities.</p>
-            </div>
-            <div class="bio-portrait">
-                <img src="img/unknown.jpeg" alt="Portrait of Sarah Chen">
-            </div>
-        </section>
+<body>
 
-        <section class="gallery">
-            <h2 class="section-title">Selected Works</h2>
-            <div class="gallery-grid">
-                <img src="img/gallery-01.jpg" alt="Neon Dreams - Mixed media on canvas, 2023">
-                <img src="img/gallery-02.jpg" alt="Urban Symphony No. 3 - Digital and acrylic, 2023">
-                <img src="img/gallery-03.jpg" alt="Fragments of Memory - Photography and oil, 2024">
-            </div>
-        </section>
+<header>
+    <h1>Mikhail Gulin</h1>
+    <h2>Conceptual Artist | Curator | Actionist</h2>
+</header>
 
-        <section class="articles">
-            <h2 class="section-title">Recent Press</h2>
-            <ul>
-                <li><a href="https://example.com/article1">"Breaking Boundaries: Sarah Chen's Urban Reflections" - Art Weekly (Jan 2024)</a></li>
-                <li><a href="https://example.com/article2">"The Intersection of Traditional and Digital: A Conversation with Sarah Chen" - Modern Artist Magazine (Dec 2023)</a></li>
-            </ul>
-            <p class="archive">
-                <a href="#" @click.prevent="toggleArchive">
-                    <span x-text="showArchive ? 'Hide press archive' : 'View full press archive'"></span>
-                </a> for more features and interviews.
-            </p>
-        </section>
-        
-        <section id="press-archive" 
-                 class="press-archive" 
-                 x-show="showArchive" 
-                 x-cloak
-                 x-transition:enter="section-fade-enter section-fade-enter-active"
-                 x-transition:leave="section-fade-leave">
-            <h3>Press Archive</h3>
-            <div class="year">2024</div>
-            <ul>
-                <li><a href="https://example.com/article1">"Breaking Boundaries: Sarah Chen's Urban Reflections" - Art Weekly (Jan 2024)</a></li>
-            </ul>
-            <div class="year">2023</div>
-            <ul>
-                <li><a href="https://example.com/article2">"The Intersection of Traditional and Digital: A Conversation with Sarah Chen" - Modern Artist Magazine (Dec 2023)</a></li>
-                <li><a href="https://example.com/article3">"Emerging Artists to Watch" - SF Chronicle (Oct 2023)</a></li>
-                <li><a href="https://example.com/article4">"Digital Meets Canvas: The New Wave" - Tech & Art Today (Aug 2023)</a></li>
-                <li><a href="https://example.com/article5">"Local Artist Bridges Traditional and Digital Divide" - Bay Area Arts Weekly (May 2023)</a></li>
-            </ul>
-            <div class="year">2022</div>
-            <ul>
-                <li><a href="https://example.com/article6">"Fresh Perspectives in Mixed Media" - Contemporary Art Review (Nov 2022)</a></li>
-                <li><a href="https://example.com/article7">"Sarah Chen: Breaking New Ground" - Digital Arts Magazine (Jul 2022)</a></li>
-            </ul>
-        </section>
-    </main>
-    <footer id="contact">
-        <p>Contact: studio@sarahchen.art | +1 (415) 555-0123</p>
-        <p>Studio visits by appointment in San Francisco, CA</p>
-        <p>&copy; 2024 Sarah Chen | All rights reserved</p>
-    </footer>
+<section class="profile">
+    <img src="img/MikhailGulin.png" alt="Mikhail Gulin Photo">
+    
+    <!-- Moved links section here -->
+    <section class="links">
+        <a href="https://www.instagram.com/michailgulin_project/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/MikhailGulinart" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="http://youtube.com/@mishaxylin" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="mailto:info@mikhailgulin.com"><i class="fas fa-envelope"></i></a>
+    </section>
+
+    <div class="bio">
+        <p><b>Mikhail Gulin</b> is a Belarusian conceptual artist, curator, and actionist whose work spans painting, objects, and performances. His art engages with socio-political themes, reimagining pop culture and Western art through the lens of Belarusian realities. Using vibrant colors, iconic cultural references, and irony, he explores social stereotypes and contemporary issues.</p>
+        <p>A graduate of the Belarusian State Academy of Arts (2004), Mikhail has been a member of the Union of Artists of Belarus since 2005. He has curated notable international projects, including <i>Palace Complex</i> (Belarus, 2012) and <i>Space of Diffusion</i> (Russia, 2015; Georgia, 2017). His work has been featured in exhibitions such as the Belarusian Pavilion at the 53rd Venice Biennale (2009), the Moscow Biennale (2015), and other prominent showcases across Europe.</p>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 Mikhail Gulin. All rights reserved.</p>
+</footer>
+
 </body>
 </html>
