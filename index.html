@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mikhail Gulin - Conceptual Artist | Curator | Actionist</title>
+    <title>Mikhail Gulin &mdash; Conceptual Artist | Curator | Actionist</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -41,7 +41,7 @@
             width: 150px;
             height: 150px;
             object-fit: cover;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
         }
         .bio {
             max-width: 620px;
@@ -89,87 +89,6 @@
                 font-size: 0.9em;
             }
         }
-        
-        /* Birthday Animation Styles */
-        .balloon {
-            position: fixed;
-            bottom: -100px;
-            width: 60px;
-            height: 80px;
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            animation: float 15s ease-in-out infinite;
-            z-index: 999;
-            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.2);
-            opacity: 0.5;
-        }
-        
-        .balloon:before {
-            content: "";
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background-color: inherit;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 50%;
-            z-index: -1;
-        }
-        
-        .balloon:after {
-            content: "";
-            position: absolute;
-            width: 20px;
-            height: 30px;
-            background: radial-gradient(circle at 70% 30%, white, rgba(255,255,255,0) 50%);
-            top: 15px;
-            left: 15px;
-            border-radius: 50%;
-            opacity: 0.4;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            50% {
-                transform: translateY(-50vh) rotate(5deg) translateX(10px);
-            }
-            75% {
-                transform: translateY(-75vh) rotate(15deg) translateX(-15px);
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(20deg);
-                opacity: 0;
-            }
-        }
-        
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background-color: #f00;
-            z-index: 998;
-            animation: confettiFall 5s ease-in-out;
-        }
-        
-        @keyframes confettiFall {
-            0% {
-                transform: translateY(-10px) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
     </style>
 </head>
 <body>
@@ -180,7 +99,7 @@
 </header>
 
 <section class="profile">
-    <img src="img/MikhailGulin.png" alt="Mikhail Gulin Photo">
+    <img src="img/MikhailGulin.jpg" srcset="img/MikhailGulin.jpg 1x, img/MikhailGulin@2x.jpg 2x" alt="Mikhail Gulin Photo">
     
     <!-- Moved links section here -->
     <section class="links">
@@ -195,132 +114,13 @@
 
         <p>A graduate of the Belarusian State Academy of Arts (2004) and member of the Union of Artists of Belarus since 2005, Mikhail has curated major international projects, including <em>Palace Complex</em> (Belarus, 2012) and <em>Space of Diffusion</em> (Russia, 2015; Georgia, 2017).</p>
 
-        <p>His exhibitions include <em>White – Red – White Ones</em> (Contemporary Art Center, Torun, Poland, 2017), <em>Every Day. Art. Solidarity. Resistance</em> (Mystetskyi Arsenal, Kyiv, Ukraine, 2021), and other group shows in Poland, Germany, Ukraine, and Lithuania.</p>
+        <p>He has exhibited widely, including at the 6th Moscow Biennale of Contemporary Art (2015) and international exhibitions such as <em>White – Red – White Ones</em> (Torun, 2017), <em>Every Day. Art. Solidarity. Resistance</em> (Kyiv, 2021), and group shows in Poland, Germany, Ukraine, and Lithuania.</p>
     </div>
 </section>
 
 <footer>
     <p>&copy; 2024&dash;2025 Mikhail Gulin. All rights reserved.</p>
 </footer>
-
-<div id="birthday-container"></div>
-
-<script>
-    // Animation Script
-    document.addEventListener('DOMContentLoaded', function() {
-        // Create balloons with random colors and positions
-        function createBalloon() {
-            const colors = ['#ff4081', '#3f51b5', '#4caf50', '#ffc107', '#9c27b0', '#00bcd4'];
-            const balloon = document.createElement('div');
-            balloon.className = 'balloon';
-            
-            // Random color
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            balloon.style.backgroundColor = randomColor;
-            
-            // Explicitly set opacity to ensure it's applied
-            balloon.style.opacity = '0.5';
-            
-            // Random position
-            const randomX = Math.random() * window.innerWidth;
-            balloon.style.left = `${randomX}px`;
-            
-            // Random size variation
-            const randomSize = 0.8 + Math.random() * 0.6; // Size between 0.8 and 1.4 of original
-            balloon.style.transform = `scale(${randomSize})`;
-            
-            // Random animation duration variation
-            const randomDuration = 15 + Math.random() * 10;
-            balloon.style.animationDuration = `${randomDuration}s`;
-            
-            // Add string to balloon
-            const string = document.createElement('div');
-            string.style.position = 'absolute';
-            string.style.width = '1.5px';
-            string.style.height = '100px';
-            string.style.backgroundColor = '#888';
-            string.style.bottom = '-100px';
-            string.style.left = '50%';
-            string.style.transform = 'translateX(-50%)';
-            string.style.zIndex = '-1';
-            balloon.appendChild(string);
-            
-            document.getElementById('birthday-container').appendChild(balloon);
-            
-            // Remove balloon after animation completes
-            setTimeout(() => {
-                balloon.remove();
-            }, randomDuration * 1000);
-        }
-        
-        // Create confetti particles at the top of the viewport
-        function createConfettiBurst() {
-            const colors = ['#ff4081', '#3f51b5', '#4caf50', '#ffc107', '#9c27b0', '#00bcd4'];
-            const container = document.getElementById('birthday-container');
-            
-            // Increase number of confetti particles
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                
-                // Random color
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.backgroundColor = randomColor;
-                
-                // Random shape
-                if (Math.random() > 0.5) {
-                    confetti.style.borderRadius = '50%';
-                } else {
-                    confetti.style.width = '7px';
-                    confetti.style.height = '7px';
-                    confetti.style.transform = `rotate(${Math.random() * 45}deg)`;
-                }
-                
-                // Position across the top of the viewport
-                confetti.style.left = `${Math.random() * window.innerWidth}px`;
-                confetti.style.top = '0px';
-                
-                // Random animation
-                const randomDuration = 3 + Math.random() * 4;
-                confetti.style.animationDuration = `${randomDuration}s`;
-                
-                // Random horizontal movement with wider spread
-                const randomHorizontal = Math.random() * (window.innerWidth * 0.7) - (window.innerWidth * 0.35);
-                confetti.style.animationName = 'confettiFall';
-                confetti.style.transform = `translateX(${randomHorizontal}px)`;
-                
-                container.appendChild(confetti);
-                
-                // Remove confetti after animation
-                setTimeout(() => {
-                    confetti.remove();
-                }, randomDuration * 1000);
-            }
-        }
-        
-        // Start animations
-        function startCelebration() {
-            // Create balloons periodically (reduced interval by ~33% for 50% more balloons)
-            setInterval(createBalloon, 3300);
-            
-            // Create an initial set of balloons at different positions
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    createBalloon();
-                }, i * 700);
-            }
-            
-            // Create confetti periodically
-            setInterval(createConfettiBurst, 5000);
-            
-            // Create initial confetti burst
-            setTimeout(createConfettiBurst, 1000);
-        }
-        
-        // Start the celebration after a short delay
-        setTimeout(startCelebration, 2000);
-    });
-</script>
 
 </body>
 </html>
