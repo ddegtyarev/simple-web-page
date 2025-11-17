@@ -20,6 +20,8 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            scroll-behavior: smooth;
+            overscroll-behavior-y: contain;
         }
         header {
             text-align: center;
@@ -57,6 +59,7 @@
             display: flex;
             flex-direction: column;
             gap: 24px;
+            scroll-snap-type: y proximity;
         }
         .artwork-item {
             background: var(--card);
@@ -64,6 +67,8 @@
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
             transition: transform 0.2s, box-shadow 0.2s;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
         }
         .artwork-item:active {
             transform: scale(0.98);
@@ -142,6 +147,17 @@
             text-align: center;
             padding: 40px;
             color: var(--muted);
+        }
+        @media (max-width: 720px) {
+            body {
+                scroll-padding-top: 12px;
+            }
+            .gallery {
+                scroll-snap-type: y mandatory;
+            }
+            .artwork-item {
+                scroll-margin-top: 10px;
+            }
         }
         @media (min-width: 640px) {
             .intro { padding: 18px 20px; }
@@ -324,8 +340,8 @@
                 });
                 
                 imageContainer.addEventListener('touchend', () => {
-                    setTimeout(() => { 
-                        isPanning = false; 
+                    setTimeout(() => {
+                        isPanning = false;
                         isTouchPanning = false;
                     }, 100);
                 });
