@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mikhail Gulin — Biography</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --text: #1f1f1f;
+            --muted: #5b5b5b;
+            --accent: #1e88e5;
+            --bg: #f7f7f7;
+            --card: #ffffff;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        header {
+            padding: 20px 16px 10px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 0.5px;
+        }
+        header p {
+            margin: 6px 0 0;
+            color: var(--muted);
+        }
+        main {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 16px 32px;
+        }
+        .hero {
+            background: linear-gradient(135deg, #f0f6ff, #f8fbff);
+            border-radius: 18px;
+            padding: 18px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .hero img {
+            width: 100%;
+            border-radius: 14px;
+            object-fit: cover;
+            aspect-ratio: 4 / 5;
+            box-shadow: 0 12px 22px rgba(0,0,0,0.08);
+        }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .hero-content h2 {
+            margin: 0;
+            font-size: 1.6rem;
+        }
+        .tagline {
+            color: var(--muted);
+            font-weight: 500;
+            margin: 0;
+        }
+        .bio-text {
+            background: var(--card);
+            padding: 18px;
+            border-radius: 14px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        .bio-text p {
+            margin: 0;
+            color: #2c2c2c;
+        }
+        .highlights {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+        }
+        .highlight-card {
+            background: var(--card);
+            padding: 14px;
+            border-radius: 12px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+        }
+        .highlight-card h3 {
+            margin: 0 0 8px;
+            font-size: 1.05rem;
+        }
+        .highlight-card ul {
+            padding-left: 18px;
+            margin: 0;
+            color: var(--muted);
+        }
+        .highlight-card li { margin-bottom: 6px; }
+        footer {
+            text-align: center;
+            padding: 18px;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+        @media (min-width: 768px) {
+            .hero {
+                grid-template-columns: 1.1fr 1fr;
+                align-items: center;
+            }
+            .hero-content h2 {
+                font-size: 1.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mikhail Gulin</h1>
+        <p>Conceptual Artist · Curator · Actionist</p>
+    </header>
+
+    <main>
+        <section class="hero">
+            <img src="img/MikhailGulin.jpg" srcset="img/MikhailGulin.jpg 1x, img/MikhailGulin@2x.jpg 2x" alt="Portrait of Mikhail Gulin">
+            <div class="hero-content">
+                <h2>Biography</h2>
+                <p class="tagline">Bold color, conceptual rigor, and playful irony rooted in Belarusian reality.</p>
+                <div class="bio-text">
+                    <p>Mikhail Gulin is a Belarusian conceptual artist and curator whose practice spans painting, sculptural objects, and performative actions. His work reimagines familiar pop culture icons and Western art imagery through the prism of Eastern European identity, often contrasting vibrant color with sharp social commentary.</p>
+                    <p>He graduated from the Belarusian State Academy of Arts in 2004 and joined the Union of Artists of Belarus in 2005. Gulin has curated landmark projects such as <em>Palace Complex</em> (Belarus, 2012) and <em>Space of Diffusion</em> (Russia, 2015; Georgia, 2017), foregrounding cross-border dialogue and experimental formats.</p>
+                    <p>Exhibited internationally—from the <em>6th Moscow Biennale of Contemporary Art</em> to independent spaces in Poland, Germany, Ukraine, and Lithuania—his projects explore solidarity, resistance, and the elasticity of cultural symbols.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="highlights" aria-label="Career highlights">
+            <article class="highlight-card">
+                <h3>Curatorial & Projects</h3>
+                <ul>
+                    <li><strong>Palace Complex</strong>, Belarus (2012)</li>
+                    <li><strong>Space of Diffusion</strong>, Russia (2015); Georgia (2017)</li>
+                    <li>Cross-disciplinary actions linking public space and performance</li>
+                </ul>
+            </article>
+            <article class="highlight-card">
+                <h3>Selected Exhibitions</h3>
+                <ul>
+                    <li>6th Moscow Biennale of Contemporary Art (2015)</li>
+                    <li><em>White – Red – White Ones</em>, Torun (2017)</li>
+                    <li><em>Every Day. Art. Solidarity. Resistance</em>, Kyiv (2021)</li>
+                </ul>
+            </article>
+            <article class="highlight-card">
+                <h3>Practice Focus</h3>
+                <ul>
+                    <li>Transforming pop references into critical storytelling</li>
+                    <li>Color-driven compositions with playful irony</li>
+                    <li>Dialogue between Belarusian identity and global narratives</li>
+                </ul>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2024–2025 Mikhail Gulin. All rights reserved.
+    </footer>
+</body>
+</html>
