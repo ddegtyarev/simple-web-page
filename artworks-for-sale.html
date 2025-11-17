@@ -53,273 +53,85 @@
             margin: 0;
             color: var(--muted);
         }
-        .gallery {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-        }
-        .card {
-            background: var(--card);
+        .instagram-feature {
+            background: #fff;
             border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 12px 26px rgba(0,0,0,0.07);
-            display: flex;
-            flex-direction: column;
+            padding: 18px 20px 24px;
+            box-shadow: 0 12px 26px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
         }
-        .card figure {
-            margin: 0;
-            position: relative;
-            background: #dfe6f2;
+        .instagram-feature h2 {
+            margin: 0 0 6px;
+            font-size: 1.3rem;
         }
-        .card img {
-            width: 100%;
-            display: block;
-            aspect-ratio: 4 / 5;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        .card:hover img { transform: scale(1.02); }
-        .badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(0,0,0,0.7);
-            color: #fff;
-            padding: 6px 10px;
-            border-radius: 999px;
-            font-size: 0.8rem;
-            letter-spacing: 0.3px;
-        }
-        .details {
-            padding: 14px 16px 18px;
-            display: grid;
-            gap: 6px;
-        }
-        .title-row {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            gap: 12px;
-        }
-        .title-row h3 {
-            margin: 0;
-            font-size: 1.15rem;
-        }
-        .title-row span {
+        .instagram-feature p {
+            margin: 0 0 14px;
             color: var(--muted);
+        }
+        .instagram-embed {
+            background: #fafafa;
+            border-radius: 14px;
+            padding: 12px;
+        }
+        .instagram-embed blockquote {
+            margin: 0 auto !important;
+            border-radius: 10px;
+            border: 1px solid #dbdbdb;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.02);
+        }
+        .instagram-feature .instagram-cta {
+            margin-top: 14px;
+            font-size: 0.95rem;
+        }
+        .instagram-feature .instagram-cta a {
+            color: var(--accent);
+            text-decoration: none;
             font-weight: 600;
-            font-size: 0.95rem;
         }
-        .meta {
-            color: var(--muted);
-            font-size: 0.95rem;
-        }
-        .description {
-            margin: 4px 0 0;
-            color: #2f2f2f;
-            font-size: 0.97rem;
+        .instagram-feature .instagram-cta a:hover {
+            text-decoration: underline;
         }
         @media (min-width: 640px) {
-            .gallery {
-                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            }
             .intro { padding: 18px 20px; }
         }
     </style>
 </head>
 <body>
-    <header>
+    <header class="intro" style="text-align:center;">
         <h1>Mikhail Gulin</h1>
-        <p>Artworks for Sale</p>
+        <p>Artworks for Sale · Curated Instagram highlights</p>
     </header>
 
     <main>
-        <section class="intro">
-            <h2>Curated selection</h2>
-            <p>Mobile-friendly viewing to explore each piece one by one. Tap or scroll through the works; titles and context appear right below every image.</p>
-        </section>
 
-        <section class="gallery" aria-label="Artworks for sale">
-            <article class="card">
-                <figure>
-                    <span class="badge">Neon City Series</span>
-                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Vibrant abstract skyline painting" loading="lazy">
-                </figure>
-                <div class="details">
-                    <div class="title-row">
-                        <h3>Electric Horizon</h3>
-                        <span>2023</span>
-                    </div>
-                    <p class="meta">Acrylic on canvas</p>
-                    <p class="description">Pulsing color bands slice through a twilight skyline, merging architecture and atmosphere.</p>
-                </div>
-            </article>
-
-            <article class="card">
-                <figure>
-                    <span class="badge">Signal Variations</span>
-                    <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=900&q=80" alt="Geometric painting with red gradients" loading="lazy">
-                </figure>
-                <div class="details">
-                    <div class="title-row">
-                        <h3>Signal Red</h3>
-                        <span>2022</span>
-                    </div>
-                    <p class="meta">Oil and pigment on panel</p>
-                    <p class="description">A layered field of crimson echoes public warning signs filtered through pop sensibility.</p>
-                </div>
-            </article>
-
-            <article class="card">
-                <figure>
-                    <span class="badge">Signal Variations</span>
-                    <img src="https://images.unsplash.com/photo-1513351105270-0ff65c2a0f19?auto=format&fit=crop&w=900&q=80" alt="Color-block painting in blue and yellow" loading="lazy">
-                </figure>
-                <div class="details">
-                    <div class="title-row">
-                        <h3>Crosswalk</h3>
-                        <span>2021</span>
-                    </div>
-                    <p class="meta">Mixed media on canvas</p>
-                    <p class="description">Pedestrian stripes break into fragments, hinting at motion, safety, and subtle disobedience.</p>
-                </div>
-            </article>
-
-            <article class="card">
-                <figure>
-                    <span class="badge">Poster Rhythms</span>
-                    <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=900&q=80" alt="Collage-inspired artwork with torn paper textures" loading="lazy">
-                </figure>
-                <div class="details">
-                    <div class="title-row">
-                        <h3>City Layers</h3>
-                        <span>2020</span>
-                    </div>
-                    <p class="meta">Paper, acrylic, spray paint</p>
-                    <p class="description">Collaged fragments from protest posters reform into a new topography of urban memory.</p>
-                </div>
-            </article>
-
-            <article class="card">
-                <figure>
-                    <span class="badge">Poster Rhythms</span>
-                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" alt="Colorful layered collage artwork" loading="lazy">
-                </figure>
-                <div class="details">
-                    <div class="title-row">
-                        <h3>Fragmented Voices</h3>
-                        <span>2020</span>
-                    </div>
-                    <p class="meta">Collage on board</p>
-                    <p class="description">Archival fragments, advertising scraps, and personal notes collide into a vibrant patchwork.</p>
-                </div>
-            </article>
-
-            <article class="card">
-                <figure>
-                    <span class="badge">Transit Notes</span>
-                    <img src="https://images.unsplash.com/photo-1520256862855-398228c41684?auto=format&fit=crop&w=900&q=80" alt="Minimalist yellow and black abstract painting" loading="lazy">
-                </figure>
-                <div class="details">
-                    <div class="title-row">
-                        <h3>Platform Marker</h3>
-                        <span>2019</span>
-                    </div>
-                    <p class="meta">Acrylic on canvas</p>
-                    <p class="description">A pared-down composition referencing transit signage and measured pauses between departures.</p>
-                </div>
-            </article>
-
-            <article class="card">
-                <figure>
-                    <span class="badge">Transit Notes</span>
-                    <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=900&q=80" alt="Abstract painting with diagonal lines" loading="lazy">
-                </figure>
-                <div class="details">
-                    <div class="title-row">
-                        <h3>Departure Gate</h3>
-                        <span>2019</span>
-                    </div>
-                    <p class="meta">Ink and acrylic on wood</p>
-                    <p class="description">Diagonal beams capture the fleeting moment between arrival, waiting, and taking off.</p>
-                </div>
-            </article>
-
-            <article class="card">
-                <figure>
-                    <span class="badge">Neon City Series</span>
-                    <img src="https://images.unsplash.com/photo-1523419400524-fd0c5a25361d?auto=format&fit=crop&w=900&q=80" alt="Night city abstract painting with neon tones" loading="lazy">
-                </figure>
-                <div class="details">
-                    <div class="title-row">
-                        <h3>Night Pulse</h3>
-                        <span>2018</span>
-                    </div>
-                    <p class="meta">Acrylic and spray paint</p>
-                    <p class="description">Neon streaks map the heartbeat of a metropolis in perpetual motion.</p>
-                </div>
-            </article>
-
-            <article class="card">
-                <figure>
-                    <span class="badge">Memory Cards</span>
-                    <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=80" alt="Soft pastel abstract artwork" loading="lazy">
-                </figure>
-                <div class="details">
-                    <div class="title-row">
-                        <h3>Soft Archive</h3>
-                        <span>2018</span>
-                    </div>
-                    <p class="meta">Pastel on paper</p>
-                    <p class="description">Gentle gradients recall fading billboards and the quiet persistence of collective memory.</p>
-                </div>
-            </article>
-
-            <article class="card">
-                <figure>
-                    <span class="badge">Memory Cards</span>
-                    <img src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80" alt="Monochrome textured painting" loading="lazy">
-                </figure>
-                <div class="details">
-                    <div class="title-row">
-                        <h3>Charcoal Echo</h3>
-                        <span>2017</span>
-                    </div>
-                    <p class="meta">Charcoal and gesso</p>
-                    <p class="description">A monochrome field scraped and reworked to reveal hidden layers of gesture.</p>
-                </div>
-            </article>
-
-            <article class="card">
-                <figure>
-                    <span class="badge">Polar Series</span>
-                    <img src="https://images.unsplash.com/photo-1463107971875-3a7c50a2735c?auto=format&fit=crop&w=900&q=80" alt="Blue and white textured painting" loading="lazy">
-                </figure>
-                <div class="details">
-                    <div class="title-row">
-                        <h3>White Noise</h3>
-                        <span>2016</span>
-                    </div>
-                    <p class="meta">Oil on canvas</p>
-                    <p class="description">Frosty blues and muted whites mimic winter static, evoking silence after a storm.</p>
-                </div>
-            </article>
-
-            <article class="card">
-                <figure>
-                    <span class="badge">Polar Series</span>
-                    <img src="https://images.unsplash.com/photo-1462396881884-de2c07cb95ed?auto=format&fit=crop&w=900&q=80" alt="Minimalist white and blue abstract painting" loading="lazy">
-                </figure>
-                <div class="details">
-                    <div class="title-row">
-                        <h3>Glacial Lines</h3>
-                        <span>2016</span>
-                    </div>
-                    <p class="meta">Acrylic and graphite</p>
-                    <p class="description">Linear etchings glide across a pale field, tracing the slow rhythm of ice.</p>
-                </div>
-            </article>
+        <section class="instagram-feature" aria-label="Instagram spotlight">
+            <div class="instagram-embed" aria-label="Instagram post DCG2_YDoN_o">
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DCG2_YDoN_o/?utm_source=ig_web_copy_link" data-instgrm-version="14" style="background:#fff; border:0; margin:0 auto; max-width:540px; width:100%; border-radius:10px;">
+                    <a href="https://www.instagram.com/p/DCG2_YDoN_o/?utm_source=ig_web_copy_link" target="_blank" rel="noreferrer noopener">View this post on Instagram</a>
+                </blockquote>
+            </div>
+            <div class="instagram-embed" aria-label="Instagram post CWaQIfmIxAb">
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CWaQIfmIxAb/?utm_source=ig_web_copy_link" data-instgrm-version="14" style="background:#fff; border:0; margin:18px auto 0; max-width:540px; width:100%; border-radius:10px;">
+                    <a href="https://www.instagram.com/p/CWaQIfmIxAb/?utm_source=ig_web_copy_link" target="_blank" rel="noreferrer noopener">View this post on Instagram</a>
+                </blockquote>
+            </div>
+            <div class="instagram-embed" aria-label="Instagram post CXG0Mauob0V">
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CXG0Mauob0V/?utm_source=ig_web_copy_link" data-instgrm-version="14" style="background:#fff; border:0; margin:18px auto 0; max-width:540px; width:100%; border-radius:10px;">
+                    <a href="https://www.instagram.com/p/CXG0Mauob0V/?utm_source=ig_web_copy_link" target="_blank" rel="noreferrer noopener">View this post on Instagram</a>
+                </blockquote>
+            </div>
+            <div class="instagram-embed" aria-label="Instagram post CaHrqy4IVc-">
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/CaHrqy4IVc-/?utm_source=ig_web_copy_link" data-instgrm-version="14" style="background:#fff; border:0; margin:18px auto 0; max-width:540px; width:100%; border-radius:10px;">
+                    <a href="https://www.instagram.com/p/CaHrqy4IVc-/?utm_source=ig_web_copy_link" target="_blank" rel="noreferrer noopener">View this post on Instagram</a>
+                </blockquote>
+            </div>
+            <p class="instagram-cta">
+                <a href="https://www.instagram.com/accounts/login/?next=%2Fmichailgulin%2F&source=desktop_nav" target="_blank" rel="noreferrer noopener">
+                    Open @michailgulin on Instagram
+                </a>
+            </p>
         </section>
     </main>
+    <script async src="https://www.instagram.com/embed.js"></script>
 </body>
 </html>
