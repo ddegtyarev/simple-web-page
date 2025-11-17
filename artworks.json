@@ -6,7 +6,7 @@
     "year": "2023",
     "price": "5000",
     "frameColor": "#f5f5dc",
-    "image": "img/a/Freak_130x100.jpg",
+    "image": "img/a/xl/Freak_130x100.jpg",
     "imageLarge": "img/a/mobile-large/Freak_130x100_large.jpg",
     "imageSmall": "img/a/mobile-small/Freak_130x100_small.jpg"
   },
@@ -17,7 +17,7 @@
     "year": "2023",
     "price": "3000",
     "frameColor": "#faf8f3",
-    "image": "img/a/Unknown_12_100x100.jpg",
+    "image": "img/a/xl/Unknown_12_100x100.jpg",
     "imageLarge": "img/a/mobile-large/Unknown_12_100x100_large.jpg",
     "imageSmall": "img/a/mobile-small/Unknown_12_100x100_small.jpg"
   },
@@ -28,7 +28,7 @@
     "year": "2024",
     "price": "1500",
     "frameColor": "#f5f5dc",
-    "image": "img/a/Untitled_70x50.jpg",
+    "image": "img/a/xl/Untitled_70x50.jpg",
     "imageLarge": "img/a/mobile-large/Untitled_70x50_large.jpg",
     "imageSmall": "img/a/mobile-small/Untitled_70x50_small.jpg"
   },
@@ -39,7 +39,7 @@
     "year": "",
     "price": "2000",
     "frameColor": "#faf8f3",
-    "image": "img/a/All_cats_go_to_heaven_but_only_after_death_40x120.jpg",
+    "image": "img/a/xl/All_cats_go_to_heaven_but_only_after_death_40x120.jpg",
     "imageLarge": "img/a/mobile-large/All_cats_go_to_heaven_but_only_after_death_40x120_large.jpg",
     "imageSmall": "img/a/mobile-small/All_cats_go_to_heaven_but_only_after_death_40x120_small.jpg"
   },
@@ -50,7 +50,7 @@
     "year": "",
     "price": "3500",
     "frameColor": "#f5f5dc",
-    "image": "img/a/Freak_140x90.jpg",
+    "image": "img/a/xl/Freak_140x90.jpg",
     "imageLarge": "img/a/mobile-large/Freak_140x90_large.jpg",
     "imageSmall": "img/a/mobile-small/Freak_140x90_small.jpg"
   },
@@ -61,7 +61,7 @@
     "year": "",
     "price": "3500",
     "frameColor": "#faf8f3",
-    "image": "img/a/Friends_100x100.jpg",
+    "image": "img/a/xl/Friends_100x100.jpg",
     "imageLarge": "img/a/mobile-large/Friends_100x100_large.jpg",
     "imageSmall": "img/a/mobile-small/Friends_100x100_small.jpg"
   },
@@ -72,7 +72,7 @@
     "year": "",
     "price": "2500",
     "frameColor": "#f5f5dc",
-    "image": "img/a/Future_govenor_60x90.jpg",
+    "image": "img/a/xl/Future_govenor_60x90.jpg",
     "imageLarge": "img/a/mobile-large/Future_govenor_60x90_large.jpg",
     "imageSmall": "img/a/mobile-small/Future_govenor_60x90_small.jpg"
   },
@@ -83,7 +83,7 @@
     "year": "",
     "price": "3500",
     "frameColor": "#faf8f3",
-    "image": "img/a/Politically_incorrect_landscape_120x120.jpg",
+    "image": "img/a/xl/Politically_incorrect_landscape_120x120.jpg",
     "imageLarge": "img/a/mobile-large/Politically_incorrect_landscape_120x120_large.jpg",
     "imageSmall": "img/a/mobile-small/Politically_incorrect_landscape_120x120_small.jpg"
   },
@@ -94,7 +94,7 @@
     "year": "",
     "price": "1500",
     "frameColor": "#f5f5dc",
-    "image": "img/a/Sexy_balloons_70x50.jpg",
+    "image": "img/a/xl/Sexy_balloons_70x50.jpg",
     "imageLarge": "img/a/mobile-large/Sexy_balloons_70x50_large.jpg",
     "imageSmall": "img/a/mobile-small/Sexy_balloons_70x50_small.jpg"
   },
@@ -105,7 +105,7 @@
     "year": "",
     "price": "1500",
     "frameColor": "#faf8f3",
-    "image": "img/a/Unknown_2_70x50.jpg",
+    "image": "img/a/xl/Unknown_2_70x50.jpg",
     "imageLarge": "img/a/mobile-large/Unknown_2_70x50_large.jpg",
     "imageSmall": "img/a/mobile-small/Unknown_2_70x50_small.jpg"
   },
@@ -116,7 +116,7 @@
     "year": "",
     "price": "4000",
     "frameColor": "#f5f5dc",
-    "image": "img/a/Unknown_9_120x100.jpg",
+    "image": "img/a/xl/Unknown_9_120x100.jpg",
     "imageLarge": "img/a/mobile-large/Unknown_9_120x100_large.jpg",
     "imageSmall": "img/a/mobile-small/Unknown_9_120x100_small.jpg"
   },
@@ -127,7 +127,7 @@
     "year": "",
     "price": "3000",
     "frameColor": "#faf8f3",
-    "image": "img/a/Unknown_13_120x100.jpg",
+    "image": "img/a/xl/Unknown_13_120x100.jpg",
     "imageLarge": "img/a/mobile-large/Unknown_13_120x100_large.jpg",
     "imageSmall": "img/a/mobile-small/Unknown_13_120x100_small.jpg"
   },
@@ -138,7 +138,7 @@
     "year": "",
     "price": "800",
     "frameColor": "#f5f5dc",
-    "image": "img/a/Untitled_40x40.jpg",
+    "image": "img/a/xl/Untitled_40x40.jpg",
     "imageLarge": "img/a/mobile-large/Untitled_40x40_large.jpg",
     "imageSmall": "img/a/mobile-small/Untitled_40x40_small.jpg"
   },
@@ -149,7 +149,7 @@
     "year": "",
     "price": "800",
     "frameColor": "#faf8f3",
-    "image": "img/a/You_look_at_art_art_looks_at_you_50x40_1.jpg",
+    "image": "img/a/xl/You_look_at_art_art_looks_at_you_50x40_1.jpg",
     "imageLarge": "img/a/mobile-large/You_look_at_art_art_looks_at_you_50x40_1_large.jpg",
     "imageSmall": "img/a/mobile-small/You_look_at_art_art_looks_at_you_50x40_1_small.jpg"
   },
@@ -160,7 +160,7 @@
     "year": "",
     "price": "800",
     "frameColor": "#f5f5dc",
-    "image": "img/a/You_look_at_art_art_looks_at_you_50x40_2.jpg",
+    "image": "img/a/xl/You_look_at_art_art_looks_at_you_50x40_2.jpg",
     "imageLarge": "img/a/mobile-large/You_look_at_art_art_looks_at_you_50x40_2_large.jpg",
     "imageSmall": "img/a/mobile-small/You_look_at_art_art_looks_at_you_50x40_2_small.jpg"
   },
@@ -171,7 +171,7 @@
     "year": "",
     "price": "800",
     "frameColor": "#faf8f3",
-    "image": "img/a/You_look_at_art_art_looks_at_you_50x40_3.jpg",
+    "image": "img/a/xl/You_look_at_art_art_looks_at_you_50x40_3.jpg",
     "imageLarge": "img/a/mobile-large/You_look_at_art_art_looks_at_you_50x40_3_large.jpg",
     "imageSmall": "img/a/mobile-small/You_look_at_art_art_looks_at_you_50x40_3_small.jpg"
   }
