@@ -20,6 +20,8 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            scroll-behavior: smooth;
+            overscroll-behavior-y: contain;
         }
         header {
             text-align: center;
@@ -57,6 +59,7 @@
             display: flex;
             flex-direction: column;
             gap: 24px;
+            scroll-snap-type: y proximity;
         }
         .artwork-item {
             background: var(--card);
@@ -64,6 +67,8 @@
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
             transition: transform 0.2s, box-shadow 0.2s;
+            scroll-snap-align: start;
+            scroll-snap-stop: normal;
         }
         .artwork-item:active {
             transform: scale(0.98);
@@ -142,6 +147,17 @@
             text-align: center;
             padding: 40px;
             color: var(--muted);
+        }
+        @media (max-width: 720px) {
+            body {
+                scroll-padding-top: 12px;
+            }
+            .gallery {
+                scroll-snap-type: y proximity;
+            }
+            .artwork-item {
+                scroll-margin-top: 10px;
+            }
         }
         @media (min-width: 640px) {
             .intro { padding: 18px 20px; }
@@ -324,8 +340,8 @@
                 });
                 
                 imageContainer.addEventListener('touchend', () => {
-                    setTimeout(() => { 
-                        isPanning = false; 
+                    setTimeout(() => {
+                        isPanning = false;
                         isTouchPanning = false;
                     }, 100);
                 });
@@ -450,6 +466,68 @@
                 
                 gallery.appendChild(artworkItem);
             });
+
+            setupGentleSnap(gallery);
+        }
+
+        // Gentle mobile snapping with eased settling
+        function setupGentleSnap(container) {
+            if (container.dataset.snapReady === 'true') return;
+            container.dataset.snapReady = 'true';
+
+            const isMobile = () => window.matchMedia('(max-width: 720px)').matches;
+            let snapTimer = null;
+            let touchActive = false;
+
+            const clearSnapTimer = () => {
+                if (snapTimer) {
+                    clearTimeout(snapTimer);
+                    snapTimer = null;
+                }
+            };
+
+            const scheduleSnap = () => {
+                if (!isMobile()) return;
+                clearSnapTimer();
+                snapTimer = setTimeout(() => {
+                    const items = Array.from(container.querySelectorAll('.artwork-item'));
+                    if (!items.length) return;
+
+                    const viewportPadding = 12;
+                    const nearest = items.reduce((result, item) => {
+                        const rect = item.getBoundingClientRect();
+                        const distance = Math.abs(rect.top - viewportPadding);
+                        if (!result || distance < result.distance) {
+                            return { distance, rect };
+                        }
+                        return result;
+                    }, null);
+
+                    if (nearest && nearest.distance > 6) {
+                        const snapTarget = window.scrollY + nearest.rect.top - viewportPadding;
+                        window.scrollTo({ top: snapTarget, behavior: 'smooth' });
+                    }
+                }, 140);
+            };
+
+            const handleTouchStart = () => {
+                touchActive = true;
+                clearSnapTimer();
+            };
+
+            const handleTouchEnd = () => {
+                touchActive = false;
+                scheduleSnap();
+            };
+
+            window.addEventListener('scroll', () => {
+                if (!isMobile() || touchActive) return;
+                scheduleSnap();
+            }, { passive: true });
+
+            window.addEventListener('touchstart', handleTouchStart, { passive: true });
+            window.addEventListener('touchend', handleTouchEnd, { passive: true });
+            window.addEventListener('touchcancel', handleTouchEnd, { passive: true });
         }
 
         // Handle window resize to update image sources
