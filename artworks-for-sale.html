@@ -20,6 +20,8 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
+            scroll-behavior: smooth;
+            overscroll-behavior-y: contain;
         }
         header {
             text-align: center;
@@ -57,6 +59,15 @@
             display: flex;
             flex-direction: column;
             gap: 24px;
+            scroll-snap-type: y proximity;
+        }
+        .snap-container {
+            scroll-snap-type: var(--snap-axis, y) proximity;
+            scroll-behavior: smooth;
+        }
+        .snap-item {
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
         }
         .artwork-item {
             background: var(--card);
@@ -64,6 +75,8 @@
             overflow: hidden;
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
             transition: transform 0.2s, box-shadow 0.2s;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
         }
         .artwork-item:active {
             transform: scale(0.98);
@@ -143,12 +156,87 @@
             padding: 40px;
             color: var(--muted);
         }
+        .snap-notes {
+            margin-top: 28px;
+            background: var(--card);
+            border-radius: 14px;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+            padding: 18px 16px;
+        }
+        .snap-notes pre {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 12px;
+            border-radius: 10px;
+            overflow: auto;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+        .snap-demo {
+            margin-top: 32px;
+            background: var(--card);
+            border-radius: 14px;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+            padding: 18px 14px 12px;
+        }
+        .snap-demo h3 {
+            margin: 0 0 12px;
+        }
+        .snap-demo .demo-track {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 6px 4px 12px;
+            scroll-padding: 0 18px;
+            --snap-axis: x;
+            scroll-snap-type: x mandatory;
+        }
+        .snap-demo .demo-card {
+            flex: 0 0 82%;
+            max-width: 340px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f7f9ff, #edf1ff);
+            padding: 12px;
+            border: 1px solid #e5e9ff;
+            scroll-snap-align: center;
+            scroll-snap-stop: always;
+        }
+        .snap-demo .demo-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+        }
+        .snap-demo .demo-card p {
+            margin: 8px 0 0;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+        @media (max-width: 720px) {
+            body {
+                scroll-padding-top: 12px;
+            }
+            .gallery {
+                scroll-snap-type: y mandatory;
+            }
+            .artwork-item {
+                scroll-margin-top: 10px;
+            }
+        }
         @media (min-width: 640px) {
             .intro { padding: 18px 20px; }
             .gallery {
                 display: grid;
                 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
                 gap: 24px;
+            }
+            .snap-demo .demo-track {
+                scroll-snap-type: none;
+            }
+            .snap-demo .demo-card {
+                scroll-snap-align: none;
+                scroll-snap-stop: normal;
             }
         }
         @media (min-width: 1024px) {
@@ -173,8 +261,257 @@
         <section class="gallery" id="gallery" aria-label="Artworks gallery">
             <div class="loading">Loading artworks...</div>
         </section>
+
+        <section class="snap-demo" aria-label="Horizontal snap scrolling demo">
+            <h3>Snap-scrolling cards (horizontal)</h3>
+            <p class="artwork-details">Soft snapping keeps each card centered when you lift your finger.</p>
+            <div class="demo-track snap-container" id="snap-demo-track" tabindex="0" aria-label="Snap scrolling cards">
+                <div class="demo-card snap-item">
+                    <img src="img/a/mobile-small/Unknown_12_100x100_small.jpg" alt="Demo artwork one">
+                    <p>Centered snap keeps a single card in view.</p>
+                </div>
+                <div class="demo-card snap-item">
+                    <img src="img/a/mobile-small/Unknown_9_120x100_small.jpg" alt="Demo artwork two">
+                    <p>Supports gentle drags and natural inertia.</p>
+                </div>
+                <div class="demo-card snap-item">
+                    <img src="img/a/mobile-small/Future_governor_60x90_small.jpg" alt="Demo artwork three">
+                    <p>Horizontal snapping mirrors vertical behaviour.</p>
+                </div>
+                <div class="demo-card snap-item">
+                    <img src="img/a/mobile-small/Unknown_13_120x100_small.jpg" alt="Demo artwork four">
+                    <p>Keyboard focus and scroll remain accessible.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="snap-notes" aria-label="Native snap scrolling references">
+            <h3>Native reference implementations</h3>
+            <p class="artwork-details">Reuse the same thresholds on iOS/Android to match the web experience.</p>
+            <pre aria-label="Swift UIScrollView snapping example">// Swift (UIKit)
+class SnapScrollView: UIScrollView, UIScrollViewDelegate {
+    var snapSpacing: CGFloat = 12
+    var snapAlignment: CGFloat = 0.5 // 0 = top, 0.5 = center
+    var snapVelocityThreshold: CGFloat = 0.55
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        delegate = self
+        decelerationRate = .fast
+        showsVerticalScrollIndicator = false
+    }
+
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView,
+                                   withVelocity velocity: CGPoint,
+                                   targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let isVertical = contentSize.height > contentSize.width
+        let axisVelocity = isVertical ? velocity.y : velocity.x
+        if abs(axisVelocity) > snapVelocityThreshold { return }
+
+        let viewport = isVertical ? bounds.height : bounds.width
+        var closest: CGFloat = targetContentOffset.pointee.y
+        var bestDistance = CGFloat.greatestFiniteMagnitude
+
+        for sub in subviews where sub.frame.intersects(bounds.insetBy(dx: -viewport, dy: -viewport)) {
+            let origin = isVertical ? sub.frame.minY : sub.frame.minX
+            let size = isVertical ? sub.frame.height : sub.frame.width
+            let target = origin - (viewport - size) * snapAlignment
+            let distance = abs(target - (isVertical ? contentOffset.y : contentOffset.x))
+            if distance < bestDistance {
+                bestDistance = distance
+                closest = target
+            }
+        }
+        targetContentOffset.pointee = isVertical ? CGPoint(x: 0, y: closest) : CGPoint(x: closest, y: 0)
+    }
+}</pre>
+            <pre aria-label="Android RecyclerView snapping example">// Kotlin (RecyclerView)
+class SoftSnapHelper(
+    private val snapAlignment: Float = 0f, // 0f = start, 0.5f = center
+    private val velocityThreshold: Float = 0.55f
+) : PagerSnapHelper() {
+    override fun findTargetSnapPosition(layoutManager: RecyclerView.LayoutManager, velocityX: Int, velocityY: Int): Int {
+        if (abs(velocityX) > velocityThreshold * 1000 || abs(velocityY) > velocityThreshold * 1000) {
+            return RecyclerView.NO_POSITION
+        }
+        val orientationHelper = if (layoutManager.canScrollVertically())
+            OrientationHelper.createVerticalHelper(layoutManager)
+        else OrientationHelper.createHorizontalHelper(layoutManager)
+
+        var closestPos = RecyclerView.NO_POSITION
+        var closestDistance = Int.MAX_VALUE
+        val center = (orientationHelper.startAfterPadding + orientationHelper.totalSpace * snapAlignment).toInt()
+
+        for (i in 0 until layoutManager.childCount) {
+            val child = layoutManager.getChildAt(i) ?: continue
+            val distance = abs(orientationHelper.getDecoratedStart(child) - center)
+            if (distance < closestDistance) {
+                closestDistance = distance
+                closestPos = layoutManager.getPosition(child)
+            }
+        }
+        return closestPos
+    }
+}</pre>
+        </section>
     </main>
     <script>
+        class SnapScroller {
+            constructor(container, options = {}) {
+                this.container = container;
+                this.options = Object.assign({
+                    orientation: 'vertical',
+                    snapAlignment: 'start',
+                    velocityThreshold: 0.45, // px per ms
+                    snapEpsilon: 36,
+                    stayVelocity: 0.08,
+                    idleTimeout: 90,
+                    enable: () => true,
+                }, options);
+
+                this.axis = this.options.orientation === 'horizontal' ? 'left' : 'top';
+                this.snapItems = Array.from(container.querySelectorAll('.snap-item'));
+                this.lastPos = this.currentPosition();
+                this.lastTime = performance.now();
+                this.velocity = 0;
+                this.scrollEndTimer = null;
+                this.animFrame = null;
+
+                this.onScroll = this.onScroll.bind(this);
+                this.onInteractionEnd = this.onInteractionEnd.bind(this);
+                this.onResize = this.onResize.bind(this);
+                container.addEventListener('scroll', this.onScroll, { passive: true });
+                container.addEventListener('touchend', this.onInteractionEnd, { passive: true });
+                container.addEventListener('mouseup', this.onInteractionEnd, { passive: true });
+                window.addEventListener('resize', this.onResize, { passive: true });
+            }
+
+            currentPosition() {
+                return this.options.orientation === 'horizontal'
+                    ? this.container.scrollLeft
+                    : this.container.scrollTop;
+            }
+
+            viewportSize() {
+                return this.options.orientation === 'horizontal'
+                    ? this.container.clientWidth
+                    : this.container.clientHeight;
+            }
+
+            itemSize(el) {
+                return this.options.orientation === 'horizontal' ? el.offsetWidth : el.offsetHeight;
+            }
+
+            offsetFromStart(el) {
+                const rect = el.getBoundingClientRect();
+                const containerRect = this.container.getBoundingClientRect();
+                return this.options.orientation === 'horizontal'
+                    ? rect.left - containerRect.left
+                    : rect.top - containerRect.top;
+            }
+
+            onScroll() {
+                const now = performance.now();
+                const position = this.currentPosition();
+                const delta = position - this.lastPos;
+                const dt = now - this.lastTime || 1;
+                this.velocity = delta / dt;
+                this.lastPos = position;
+                this.lastTime = now;
+
+                clearTimeout(this.scrollEndTimer);
+                this.scrollEndTimer = setTimeout(() => this.handleScrollEnd(false), this.options.idleTimeout);
+            }
+
+            onInteractionEnd() {
+                this.handleScrollEnd(true);
+            }
+
+            onResize() {
+                this.snapItems = Array.from(this.container.querySelectorAll('.snap-item'));
+            }
+
+            handleScrollEnd(force) {
+                if (!this.options.enable()) return;
+                const velocityMagnitude = Math.abs(this.velocity);
+                if (!force && velocityMagnitude > this.options.velocityThreshold) {
+                    return; // let strong flicks finish naturally
+                }
+
+                const { target } = this.findNearestSnap();
+                if (target === undefined) return;
+
+                const distance = Math.abs(target - this.currentPosition());
+                if (distance < this.options.snapEpsilon && velocityMagnitude < this.options.stayVelocity) {
+                    return; // respect intentional small stops
+                }
+                this.animateTo(target);
+            }
+
+            findNearestSnap() {
+                let nearest = { distance: Number.MAX_VALUE };
+                const current = this.currentPosition();
+                const viewport = this.viewportSize();
+
+                this.snapItems.forEach((el) => {
+                    const offset = this.offsetFromStart(el);
+                    const size = this.itemSize(el);
+                    let target = current + offset;
+
+                    if (this.options.snapAlignment === 'center') {
+                        target = target - (viewport - size) / 2;
+                    }
+
+                    const distance = Math.abs(target - current);
+                    if (distance < nearest.distance) {
+                        nearest = { distance, target, element: el };
+                    }
+                });
+
+                return nearest;
+            }
+
+            animateTo(target) {
+                if (!Number.isFinite(target)) return;
+                cancelAnimationFrame(this.animFrame);
+                const start = this.currentPosition();
+                const change = target - start;
+                if (Math.abs(change) < 1) return;
+                const duration = Math.min(650, Math.max(220, Math.abs(change) * 0.6));
+                const startTime = performance.now();
+
+                const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+                const step = () => {
+                    const now = performance.now();
+                    const progress = Math.min(1, (now - startTime) / duration);
+                    const eased = easeOutCubic(progress);
+                    const value = start + change * eased;
+                    this.container.scrollTo({
+                        left: this.options.orientation === 'horizontal' ? value : undefined,
+                        top: this.options.orientation === 'vertical' ? value : undefined,
+                        behavior: 'auto',
+                    });
+                    if (progress < 1) {
+                        this.animFrame = requestAnimationFrame(step);
+                    }
+                };
+
+                this.animFrame = requestAnimationFrame(step);
+            }
+
+            destroy() {
+                cancelAnimationFrame(this.animFrame);
+                clearTimeout(this.scrollEndTimer);
+                this.container.removeEventListener('scroll', this.onScroll);
+                this.container.removeEventListener('touchend', this.onInteractionEnd);
+                this.container.removeEventListener('mouseup', this.onInteractionEnd);
+                window.removeEventListener('resize', this.onResize);
+            }
+        }
+
         // Load artworks from JSON
         async function loadArtworks() {
             try {
@@ -188,13 +525,14 @@
             }
         }
 
+        let gallerySnapper;
         function displayArtworks(artworks) {
             const gallery = document.getElementById('gallery');
             gallery.innerHTML = '';
 
             artworks.forEach((artwork, index) => {
                 const artworkItem = document.createElement('div');
-                artworkItem.className = 'artwork-item';
+                artworkItem.className = 'artwork-item snap-item';
                 
                 // Determine which image to use based on screen size
                 const imageContainer = document.createElement('div');
@@ -324,8 +662,8 @@
                 });
                 
                 imageContainer.addEventListener('touchend', () => {
-                    setTimeout(() => { 
-                        isPanning = false; 
+                    setTimeout(() => {
+                        isPanning = false;
                         isTouchPanning = false;
                     }, 100);
                 });
@@ -450,6 +788,18 @@
                 
                 gallery.appendChild(artworkItem);
             });
+
+            if (gallerySnapper) {
+                gallerySnapper.destroy();
+            }
+            gallerySnapper = new SnapScroller(gallery, {
+                orientation: 'vertical',
+                snapAlignment: 'start',
+                snapEpsilon: 52,
+                velocityThreshold: 0.55,
+                stayVelocity: 0.06,
+                enable: () => window.matchMedia('(max-width: 720px)').matches,
+            });
         }
 
         // Handle window resize to update image sources
@@ -462,8 +812,24 @@
             }, 250);
         });
 
+        function initDemoSnapper() {
+            const demoTrack = document.getElementById('snap-demo-track');
+            demoTrack.classList.add('snap-container');
+            demoTrack.querySelectorAll('.demo-card').forEach((card) => card.classList.add('snap-item'));
+            return new SnapScroller(demoTrack, {
+                orientation: 'horizontal',
+                snapAlignment: 'center',
+                snapEpsilon: 40,
+                velocityThreshold: 0.6,
+                stayVelocity: 0.08,
+                enable: () => window.matchMedia('(max-width: 900px)').matches,
+            });
+        }
+
+        let demoSnapper;
         // Load artworks on page load
         loadArtworks();
+        demoSnapper = initDemoSnapper();
     </script>
 </body>
 </html>
