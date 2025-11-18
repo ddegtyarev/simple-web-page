@@ -476,58 +476,99 @@
             container.dataset.snapReady = 'true';
 
             const isMobile = () => window.matchMedia('(max-width: 720px)').matches;
-            let snapTimer = null;
-            let touchActive = false;
+            const viewportPadding = 12;
+            const settleQuietMs = 180;
+            const minDelta = 0.45;
 
-            const clearSnapTimer = () => {
-                if (snapTimer) {
-                    clearTimeout(snapTimer);
-                    snapTimer = null;
+            let rafId = null;
+            let settleTimer = null;
+            let lastY = window.scrollY;
+
+            const clearTimers = () => {
+                if (rafId) {
+                    cancelAnimationFrame(rafId);
+                    rafId = null;
+                }
+                if (settleTimer) {
+                    clearTimeout(settleTimer);
+                    settleTimer = null;
                 }
             };
 
-            const scheduleSnap = () => {
+            const snapToNearest = () => {
                 if (!isMobile()) return;
-                clearSnapTimer();
-                snapTimer = setTimeout(() => {
-                    const items = Array.from(container.querySelectorAll('.artwork-item'));
-                    if (!items.length) return;
+                const items = Array.from(container.querySelectorAll('.artwork-item'));
+                if (!items.length) return;
 
-                    const viewportPadding = 12;
-                    const nearest = items.reduce((result, item) => {
-                        const rect = item.getBoundingClientRect();
-                        const distance = Math.abs(rect.top - viewportPadding);
-                        if (!result || distance < result.distance) {
-                            return { distance, rect };
-                        }
-                        return result;
-                    }, null);
-
-                    if (nearest && nearest.distance > 6) {
-                        const snapTarget = window.scrollY + nearest.rect.top - viewportPadding;
-                        window.scrollTo({ top: snapTarget, behavior: 'smooth' });
+                const nearest = items.reduce((result, item) => {
+                    const rect = item.getBoundingClientRect();
+                    const distance = Math.abs(rect.top - viewportPadding);
+                    if (!result || distance < result.distance) {
+                        return { distance, rect };
                     }
-                }, 140);
+                    return result;
+                }, null);
+
+                if (nearest && nearest.distance > 4) {
+                    const snapTarget = window.scrollY + nearest.rect.top - viewportPadding;
+                    window.scrollTo({ top: snapTarget, behavior: 'smooth' });
+                }
+            };
+
+            const stopTracking = () => {
+                clearTimers();
+            };
+
+            const trackScroll = () => {
+                const currentY = window.scrollY;
+                const delta = Math.abs(currentY - lastY);
+                lastY = currentY;
+
+                if (delta < minDelta) {
+                    if (!settleTimer) {
+                        settleTimer = setTimeout(() => {
+                            settleTimer = null;
+                            snapToNearest();
+                            stopTracking();
+                        }, settleQuietMs);
+                    }
+                } else if (settleTimer) {
+                    clearTimeout(settleTimer);
+                    settleTimer = null;
+                }
+
+                rafId = requestAnimationFrame(trackScroll);
+            };
+
+            const startTracking = () => {
+                if (!isMobile()) return;
+                if (rafId) return;
+                lastY = window.scrollY;
+                rafId = requestAnimationFrame(trackScroll);
             };
 
             const handleTouchStart = () => {
-                touchActive = true;
-                clearSnapTimer();
+                stopTracking();
             };
 
             const handleTouchEnd = () => {
-                touchActive = false;
-                scheduleSnap();
+                startTracking();
             };
 
             window.addEventListener('scroll', () => {
-                if (!isMobile() || touchActive) return;
-                scheduleSnap();
+                if (!isMobile()) {
+                    stopTracking();
+                    return;
+                }
+                startTracking();
             }, { passive: true });
 
             window.addEventListener('touchstart', handleTouchStart, { passive: true });
             window.addEventListener('touchend', handleTouchEnd, { passive: true });
             window.addEventListener('touchcancel', handleTouchEnd, { passive: true });
+            window.addEventListener('resize', () => {
+                stopTracking();
+            }, { passive: true });
         }
 
         // Handle window resize to update image sources
