@@ -3,156 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mikhail Gulin — Biography</title>
+    <title>Mikhail Gulin — CV</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        :root {
-            --text: #1f1f1f;
-            --muted: #5b5b5b;
-            --accent: #1e88e5;
-            --bg: #f7f7f7;
-            --card: #ffffff;
-        }
-        * { box-sizing: border-box; }
         body {
-            margin: 0;
             font-family: 'Poppins', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         header {
-            padding: 20px 16px 6px;
             text-align: center;
+            padding: 10px;
         }
-        header h1 { margin: 0; font-size: 2rem; letter-spacing: 0.5px; }
-        header p { margin: 6px 0 0; color: var(--muted); }
-
-        main {
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 8px 16px 32px;
+        h1 {
+            font-size: 2em;
+            margin: 0;
         }
-
-        /* HERO */
-        .hero {
-            background: linear-gradient(135deg, #f0f6ff, #f8fbff);
-            border-radius: 18px;
-            padding: 18px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 18px;
-            align-items: start;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        h2 {
+            font-size: 1.3em;
+            font-weight: lighter;
+            color: #777;
         }
-        .hero img {
-            width: 100%;
-            border-radius: 14px;
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+        }
+        .profile img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
             object-fit: cover;
-            aspect-ratio: 4 / 5;
-            box-shadow: 0 12px 22px rgba(0,0,0,0.08);
+            margin-bottom: 5px;
         }
-        .hero-content { display: flex; flex-direction: column; gap: 12px; }
-        .hero-content h2 { margin: 0; font-size: 1.6rem; }
-        .tagline { color: var(--muted); font-weight: 500; margin: 0; }
-
-        /* BIO */
-        .bio-text {
-            background: var(--card);
-            padding: 18px;
-            border-radius: 14px;
-            box-shadow: 0 8px 18px rgba(0,0,0,0.05);
-            display: grid;
-            gap: 12px;
+        .contact-info {
+            max-width: 620px;
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 0.95em;
+            color: #555;
         }
-        .bio-text p { margin: 0; color: #2c2c2c; }
-
-        /* HIGHLIGHTS */
-        .highlights {
-            margin-top: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 14px;
+        .contact-info p {
+            margin: 5px 0;
         }
-        .highlight-card {
-            background: var(--card);
-            padding: 14px;
-            border-radius: 12px;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+        .contact-info a {
+            color: #007BFF;
+            text-decoration: none;
         }
-        .highlight-card h3 { margin: 0 0 8px; font-size: 1.05rem; }
-        .highlight-card ul { padding-left: 18px; margin: 0; color: var(--muted); }
-        .highlight-card li { margin-bottom: 6px; }
-
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        .links {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        .links a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            font-size: 2em;
+            transition: color 0.3s;
+        }
+        .links a:hover {
+            color: #007BFF;
+        }
+        .cv-section {
+            max-width: 900px;
+            width: 100%;
+            padding: 20px;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .cv-section h3 {
+            font-size: 1.5em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 5px;
+        }
+        .cv-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .cv-section li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        .cv-section .year {
+            font-weight: bold;
+            color: #007BFF;
+        }
+        .education {
+            margin-bottom: 15px;
+        }
         footer {
             text-align: center;
-            padding: 18px;
-            color: var(--muted);
-            font-size: 0.95rem;
+            padding: 20px;
+            font-size: 0.9em;
+            color: #777;
         }
-        footer p { margin: 0; }
-
-        @media (min-width: 768px) {
-            /* wider layout: fixed image column + content column */
-            .hero {
-                grid-template-columns: 360px 1fr;
+        @media (max-width: 600px) {
+            header {
+                padding: 15px 10px 5px;
             }
-            .hero img {
-                width: 100%;
-                height: 100%;
-                border-radius: 12px;
-                aspect-ratio: 3 / 4;
+            h1 {
+                font-size: 1.6em;
             }
-            .hero-content h2 { font-size: 1.9rem; }
+            h2 {
+                font-size: 0.9em;
+                margin-top: 5px;
+            }
+            .profile {
+                margin: 5px 10px;
+            }
+            .profile img {
+                width: 100px;
+                height: 100px;
+            }
+            .links {
+                margin: 8px 0;
+            }
+            .links a {
+                font-size: 1.6em;
+                margin: 0 10px;
+            }
+            .contact-info {
+                font-size: 0.85em;
+                padding: 5px 15px;
+            }
+            .contact-info p {
+                margin: 3px 0;
+            }
+            .cv-section {
+                padding: 12px;
+                margin: 8px;
+                width: calc(100% - 16px);
+            }
+            .cv-section h3 {
+                font-size: 1.2em;
+                margin-bottom: 10px;
+            }
+            .cv-section li {
+                margin-bottom: 10px;
+                font-size: 0.9em;
+                line-height: 1.5;
+            }
+            .cv-section .year {
+                display: block;
+                margin-bottom: 2px;
+            }
+            .education p {
+                font-size: 0.9em;
+                line-height: 1.5;
+            }
+            footer {
+                padding: 15px 10px;
+                font-size: 0.85em;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Mikhail Gulin</h1>
-        <p>Conceptual Artist · Curator · Actionist</p>
-    </header>
 
-    <main>
-        <section class="hero" aria-labelledby="bio-heading">
-            <img src="img/MikhailGulin.jpg" srcset="img/MikhailGulin.jpg 1x, img/MikhailGulin@2x.jpg 2x" width="800" height="1000" alt="Portrait of Mikhail Gulin">
-            <div class="hero-content">
-                <h2 id="bio-heading">Biography</h2>
-                <p class="tagline">Bold color, conceptual rigor, and playful irony rooted in Belarusian reality.</p>
-                <div class="bio-text">
-                    <p>Mikhail Gulin is a Belarusian conceptual artist and curator whose practice spans painting, sculptural objects, and performative actions. His work reimagines familiar pop culture icons and Western art imagery through the prism of Eastern European identity, often contrasting vibrant color with sharp social commentary.</p>
-                    <p>He graduated from the Belarusian State Academy of Arts in 2004 and joined the Union of Artists of Belarus in 2005. Gulin has curated landmark projects such as <em>Palace Complex</em> (Belarus, 2012) and <em>Space of Diffusion</em> (Russia, 2015; Georgia, 2017), foregrounding cross-border dialogue and experimental formats.</p>
-                    <p>Exhibited internationally—from the <em>6th Moscow Biennale of Contemporary Art</em> to independent spaces in Poland, Germany, Ukraine, and Lithuania—his projects explore solidarity, resistance, and the elasticity of cultural symbols.</p>
-                </div>
-            </div>
-        </section>
+<header>
+    <h1>Mikhail Gulin</h1>
+    <h2>Conceptual Artist | Curator | Actionist</h2>
+</header>
 
-        <section class="highlights" aria-label="Career highlights">
-            <!-- Removed "Curatorial Projects" to simplify highlights -->
-            <article class="highlight-card">
-                <h3>Selected Exhibitions</h3>
-                <ul>
-                    <li>6th Moscow Biennale of Contemporary Art (2015)</li>
-                    <li><em>White – Red – White Ones</em>, Torun (2017)</li>
-                    <li><em>Every Day. Art. Solidarity. Resistance</em>, Kyiv (2021)</li>
-                </ul>
-            </article>
+<section class="profile">
+    <img src="img/MikhailGulin.jpg" srcset="img/MikhailGulin.jpg 1x, img/MikhailGulin@2x.jpg 2x" width="150" height="150" alt="Mikhail Gulin Photo">
+    
+    <section class="links">
+        <a href="https://www.instagram.com/michailgulin/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/MikhailGulinart" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="http://youtube.com/@mishaxylin" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="mailto:info@mikhailgulin.com"><i class="fas fa-envelope"></i></a>
+    </section>
 
-            <article class="highlight-card">
-                <h3>Practice Focus</h3>
-                <ul>
-                    <li>Transforming pop references into critical storytelling</li>
-                    <li>Color-driven compositions with playful irony</li>
-                    <li>Dialogue between Belarusian identity and global narratives</li>
-                </ul>
-            </article>
-        </section>
-    </main>
+    <div class="contact-info">
+        <p><strong>Born:</strong> 1977, Gomel, Belarus</p>
+        <p><strong>Email:</strong> <a href="mailto:info@mikhailgulin.com">info@mikhailgulin.com</a></p>
+        <p><strong>Web:</strong> <a href="https://www.mikhailgulin.com" target="_blank">www.mikhailgulin.com</a></p>
+    </div>
+</section>
 
-    <footer>
-        <p>&copy; 2024&dash;2025 Mikhail Gulin. All rights reserved.</p>
-    </footer>
+<div class="cv-section">
+    <h3>Education</h3>
+    <div class="education">
+        <p><span class="year">1998 – 2004</span> Belarusian State Academy of Arts, Department of Monumental and Decorative Art</p>
+        <p><span class="year">1994 – 1998</span> Art College</p>
+        <p><span class="year">1991 – 1994</span> Art School</p>
+    </div>
+</div>
+
+<div class="cv-section">
+    <h3>Solo Exhibitions</h3>
+    <ul>
+        <li><span class="year">2023</span> 1+1=1 Art Group, "Cafe Belarus 2. Cassandra Complex", Japanese Palace (Dresden, Germany)</li>
+        <li><span class="year">2022</span> 1+1=1 Art Group, "Every Day Is Exactly the Same", HAU (Berlin, Germany)</li>
+        <li><span class="year">2022</span> "Nothing New", Gallery DK (Minsk, Belarus)</li>
+        <li><span class="year">2020</span> "(Not) True", "Canned" Art Quarter (Brest, Belarus)</li>
+        <li><span class="year">2019</span> "Social Role", performance, interactive installation, Cultural Hub Ok16 (Minsk, Belarus)</li>
+        <li><span class="year">2018</span> "Parts of something bigger…", A&V Art Gallery (Minsk, Belarus)</li>
+        <li><span class="year">2018</span> "100% Masculine", Cova Art Gallery (Eindhoven, The Netherlands)</li>
+        <li><span class="year">2017</span> "I Could Do That!", Ў Gallery of Contemporary Art (Minsk, Belarus)</li>
+        <li><span class="year">2015</span> "ART MUST" ARTVILNIUS'15 International Contemporary Art Fair "Litexpo" (Vilnius, Lithuania)</li>
+        <li><span class="year">2014</span> "Za Myazhoi", Gallery "OSNOVA", Contemporary Art Center "Winzavod" (Moscow, Russia)</li>
+        <li><span class="year">2011</span> "An Exhibition of Non children Picture", Ў Gallery of Contemporary Art (Minsk, Belarus)</li>
+        <li><span class="year">2008</span> "(HE) BEST", Gallery "Podzemka" (Minsk, Belarus)</li>
+        <li><span class="year">2008</span> "K-R-R", Gallery "ZOYA" (Warsaw, Poland)</li>
+        <li><span class="year">2006</span> "HappyendЕЦ", Gallery "S ART" (Moscow, Russia)</li>
+        <li><span class="year">2005</span> "1+1=1" Museum of Modern Fine Arts (Minsk, Belarus)</li>
+    </ul>
+</div>
+
+<div class="cv-section">
+    <h3>Group Exhibitions</h3>
+    <ul>
+        <li><span class="year">2025</span> "Once We Were Trees, Now We Are Birds", ifa Gallery (Berlin, Germany)</li>
+        <li><span class="year">2024</span> Poetry & Performance. The Eastern European perspective, Museum of Czech Literature (Praha, Czech Republic)</li>
+        <li><span class="year">2023</span> "Drifting accumulation" LCB (Berlin, Germany)</li>
+        <li><span class="year">2023</span> "Action Spaces" Kunsthaus Raskolnikow (Dresden, Germany)</li>
+        <li><span class="year">2022</span> "Red Line", Klaipeda Exhibition Hall (Klaipeda, Lithuania)</li>
+        <li><span class="year">2021</span> Triennial "Concept", Republican Art Gallery "Palace of Arts" (Minsk, Belarus)</li>
+        <li><span class="year">2021</span> "Screams of the silenced" Gallery The Grey Space in the Middle (The Hague, The Netherlands)</li>
+        <li><span class="year">2021</span> Grey Mandorla Manifest, Grey Mandorla Studio (Poznan, Poland)</li>
+        <li><span class="year">2021</span> "Every Day. Art. Solidarity. Resistance", Mystetskyi Arsenal (Kyiv, Ukraine)</li>
+        <li><span class="year">2020</span> "Touching distance", Ў Gallery of Contemporary Art (Minsk, Belarus)</li>
+        <li><span class="year">2020</span> "Green Corridor", DIDI Gallery (St. Petersburg, Russia)</li>
+        <li><span class="year">2017</span> "White – Red – White Ones" Contemporary art center (Torun, Poland)</li>
+        <li><span class="year">2017</span> "Space of diffusion" Contemporary Art Space (Batumi, Georgia)</li>
+        <li><span class="year">2017</span> "Space of diffusion" National History museum (Tbilisi, Georgia)</li>
+        <li><span class="year">2016</span> "NON Fashion" National Contemporary Center of Art (Minsk, Belarus)</li>
+        <li><span class="year">2016</span> "ZBOR. Movement of Belarusian Art", Public Space "Isolation" (Kiev, Ukraine)</li>
+        <li><span class="year">2015</span> The 6th Moscow Biennale of Contemporary Art "Alanika. The method of experiment", museum-exhibition center "Worker and Collective Farm Girl" (Moscow, Russia)</li>
+        <li><span class="year">2015</span> "Space of diffusion", National Contemporary Art Center (Kaliningrad, Russia)</li>
+        <li><span class="year">2015</span> "ZBOR. Constructing archive", Arsenal Gallery (Bialystok, Poland)</li>
+        <li><span class="year">2014</span> Ilya Kukushkin, Mikhail Gulin. "Visual synthesis" Contemporary Art Center "Winzavod", Gallery OSNOVA (Moscow, Russia)</li>
+        <li><span class="year">2014</span> Art project "XXY", Ў Gallery of Contemporary Art (Minsk, Belarus)</li>
+        <li><span class="year">2013</span> "Hole Mole #2", Warsztaty Kultury (Lublin, Poland)</li>
+        <li><span class="year">2012</span> "Going Public/On the Difficulties of a Public Statement", International Project (Germany, Belarus, Lithuania, Russia)</li>
+        <li><span class="year">2012</span> "Hole Mole", Aula Gallery (Poznan, Poland)</li>
+        <li><span class="year">2012</span> "THE PALACE COMPLEX", Gomel Palace and Park Ensemble (Gomel, Belarus)</li>
+        <li><span class="year">2012</span> "THE RADIUS OF ZERO. THE ONTOLOGY OF ART-ZERO", plant Horizont (Minsk, Belarus)</li>
+        <li><span class="year">2011</span> "She Cannot Say Heaven", Ў Gallery of Contemporary Art (Minsk, Belarus)</li>
+        <li><span class="year">2010</span> "From the contrary", Center for Contemporary Art Winzavod (Moscow, Russia)</li>
+        <li><span class="year">2010</span> "Vis-à-Vis. Actual Dialogues", Ў Gallery of Contemporary Art (Minsk, Belarus)</li>
+        <li><span class="year">2010</span> "ЛІТАRА. Visual Study of Poetry" Goethe-Institut (Minsk, Belarus)</li>
+        <li><span class="year">2010</span> "Oil, Painting", Ў Gallery of Contemporary Art (Minsk, Belarus)</li>
+        <li><span class="year">2009</span> "Philosophy of the masses. The Belarusian neo-pop art", Ў Gallery of Contemporary Art (Minsk, Belarus)</li>
+        <li><span class="year">2009</span> Art project "Belarussian Pavilion at 53d Venice Biennale" BELEXPO Exhibition Center (Minsk, Belarus)</li>
+        <li><span class="year">2009</span> Exhibition "Earth Day Art Contest Award" Pushkin library (Minsk, Belarus)</li>
+        <li><span class="year">2008</span> International Competition "HUMOURfest15 – The Olympic Games: Made in China – Beijing 2008" (Palazzo Trinci, Foligno, Italy)</li>
+        <li><span class="year">2007</span> Festival of vanguard art "Mammoth" National School of Beauty (Minsk, Belarus)</li>
+        <li><span class="year">2006</span> Exhibition of Painting and Sculpture "Pommernhus" Gallery (Greifswald, Germany)</li>
+    </ul>
+</div>
+
+<div class="cv-section">
+    <h3>Residences, Symposiums, Festivals, Scholarships</h3>
+    <ul>
+        <li><span class="year">2023</span> Residence PerspAKTIV (Dresden, Germany)</li>
+        <li><span class="year">2023</span> Martin Roth Initiative Scholarship (Dresden, Germany)</li>
+        <li><span class="year">2021</span> The contemporary music festival Eclat Echoes – Voices from Belarus (Stuttgart, Germany)</li>
+        <li><span class="year">2021</span> 13rd public art festival "Otwarte miasto / Open city" (Lublin, Poland)</li>
+        <li><span class="year">2017</span> CREATurE Live Art festival 2017 (Kaunas, Lithuania)</li>
+        <li><span class="year">2016</span> 10th International Art Symposium "Alanica10. Method of Experiment" Vladikavkaz, North Ossetia-Alania</li>
+        <li><span class="year">2016</span> 3rd performance festival "Simbolis" (Plunge, Lithuania)</li>
+        <li><span class="year">2016</span> Land art project "Sculpture compositions. Dialogue with nature", initiated by the public organization Vandens bokštas, with the support of the Ministry of Culture of Lithuania (Plunge, Lithuania)</li>
+        <li><span class="year">2016</span> 7th ARTBAT FEST Contemporary Art Festival (Almaty, Kazakhstan)</li>
+        <li><span class="year">2014</span> CURATORIAL LAB. Polish-Belarusian exchange of experience. International Program for Curators (Minsk, Warsaw, Poznan, Belarus, Poland)</li>
+        <li><span class="year">2014</span> 8th International Symposium "Alanica" (Vladikavkaz, North Ossetia-Alania)</li>
+        <li><span class="year">2012</span> International project "Going public: Difficulties of public speaking" under the auspices of the Goethe Institute (Germany, Lithuania, Russia, Belarus)</li>
+        <li><span class="year">2011</span> International competition "Discover Belarus - Discover Europe" (Bautzen, Dresden, Germany)</li>
+        <li><span class="year">2008</span> The residence of Belarusian artists, at the invitation of the magazine «Umelec» (Prague, Czech Republic)</li>
+    </ul>
+</div>
+
+<div class="cv-section">
+    <h3>Art Fairs</h3>
+    <ul>
+        <li><span class="year">2019</span> "Export Talent", Armenia Art Fair (Yerevan, Armenia)</li>
+        <li><span class="year">2015</span> "ARTMUST…", ARTVILNIUS 15 International Contemporary Art Fair "Litexpo" (Vilnius, Lithuania)</li>
+        <li><span class="year">2014</span> Berliner Liste, Contemporary Art Fair (Berlin, Germany)</li>
+        <li><span class="year">2013</span> Art Moscow 18th International Art Fair (Central House of Artists, Moscow, Russia)</li>
+        <li><span class="year">2013</span> Slick Brussels, Art Fair for Contemporary Art (Wild gallery space, Brussels, Belgium)</li>
+        <li><span class="year">2013</span> Let's Talk About …, program of the Independent Art Fair Supermarket 2013, Kulturhuset (Stockholm, Sweden)</li>
+        <li><span class="year">2012</span> Berliner Liste, Art Fair for Contemporary Art (Berlin, Germany)</li>
+        <li><span class="year">2012</span> SWAB, Art Fair for Contemporary Art (Barcelona, Spain)</li>
+        <li><span class="year">2011</span> "She Cannot Say Heaven", ART VILNIUS'11 International Contemporary Art Fair Lithuanian Exhibition Center LITEXPO (Vilnius, Lithuania)</li>
+        <li><span class="year">2009</span> "Red Corner" ART VILNIUS'09 International Contemporary Art Fair Lithuanian Exhibition Center LITEXPO (Vilnius, Lithuania)</li>
+    </ul>
+</div>
+
+<div class="cv-section">
+    <h3>Awards</h3>
+    <ul>
+        <li><span class="year">2009</span> Honorable Mention Prize. "Earth Day Art Contest Award" US Embassy in Minsk, Belarus</li>
+    </ul>
+</div>
+
+<div class="cv-section">
+    <h3>Other Projects</h3>
+    <ul>
+        <li><span class="year">2023</span> Charity Auction for Refugees from Ukraine and Belarus, Gallery Piękna (Warsaw, Poland)</li>
+        <li><span class="year">2022</span> Charity Auction for Refugees from Ukraine and Belarus, Gallery Piekna (Warsaw, Poland)</li>
+        <li><span class="year">2020</span> Auction Жыве Беларусь!, Vladey (Moscow, Russia)</li>
+        <li><span class="year">2009</span> The Artist of performance "Pippi Longstocking" the Belarus state theatre of dolls. In the co-authorship from A.Slabodchykava. (Minsk, Belarus)</li>
+    </ul>
+</div>
+
+<div class="cv-section">
+    <p style="font-style: italic; color: #555;">Artworks are in collections of the North Caucasian branch of the Pushkin Museum (Vladikavkaz, North Ossetia), XO Gallery (Minsk, Belarus), Mistetskiy Arsenal (Kyiv, Ukraine) and different private collections.</p>
+</div>
+
+<footer>
+    <p>&copy; 2024&dash;2025 Mikhail Gulin. All rights reserved.</p>
+</footer>
+
 </body>
 </html>
