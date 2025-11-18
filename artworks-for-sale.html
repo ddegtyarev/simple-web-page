@@ -477,18 +477,19 @@
 
             const isMobile = () => window.matchMedia('(max-width: 720px)').matches;
             const viewportPadding = 12;
-            const settleQuietMs = 180;
-            const minDelta = 0.45;
+            const quietWindowMs = 160;
+            const velocityThreshold = 0.18;
+            const minSnapGap = 10;
 
-            let rafId = null;
             let settleTimer = null;
             let lastY = window.scrollY;
+            let lastTimestamp = performance.now();
+            let lastScrollEventAt = performance.now();
+            let lastVelocity = 0;
+            let snapInProgress = false;
+            let touchActive = false;
 
-            const clearTimers = () => {
-                if (rafId) {
-                    cancelAnimationFrame(rafId);
-                    rafId = null;
-                }
+            const clearSettleTimer = () => {
                 if (settleTimer) {
                     clearTimeout(settleTimer);
                     settleTimer = null;
@@ -496,78 +497,72 @@
             };
 
             const snapToNearest = () => {
-                if (!isMobile()) return;
+                if (!isMobile() || snapInProgress) return;
                 const items = Array.from(container.querySelectorAll('.artwork-item'));
                 if (!items.length) return;
 
-                const nearest = items.reduce((result, item) => {
+                const nearest = items.reduce((closest, item) => {
                     const rect = item.getBoundingClientRect();
                     const distance = Math.abs(rect.top - viewportPadding);
-                    if (!result || distance < result.distance) {
+                    if (!closest || distance < closest.distance) {
                         return { distance, rect };
                     }
-                    return result;
+                    return closest;
                 }, null);
 
-                if (nearest && nearest.distance > 4) {
-                    const snapTarget = window.scrollY + nearest.rect.top - viewportPadding;
-                    window.scrollTo({ top: snapTarget, behavior: 'smooth' });
-                }
+                if (!nearest) return;
+
+                const targetOffset = window.scrollY + nearest.rect.top - viewportPadding;
+                const distance = Math.abs(targetOffset - window.scrollY);
+                if (distance < minSnapGap) return;
+
+                snapInProgress = true;
+                window.scrollTo({ top: targetOffset, behavior: 'smooth' });
+                setTimeout(() => {
+                    snapInProgress = false;
+                }, 420);
             };
 
-            const stopTracking = () => {
-                clearTimers();
-            };
-
-            const trackScroll = () => {
-                const currentY = window.scrollY;
-                const delta = Math.abs(currentY - lastY);
-                lastY = currentY;
-
-                if (delta < minDelta) {
-                    if (!settleTimer) {
-                        settleTimer = setTimeout(() => {
-                            settleTimer = null;
-                            snapToNearest();
-                            stopTracking();
-                        }, settleQuietMs);
+            const requestSettleCheck = () => {
+                if (!isMobile() || touchActive || snapInProgress) return;
+                clearSettleTimer();
+                settleTimer = setTimeout(() => {
+                    const timeSinceScroll = performance.now() - lastScrollEventAt;
+                    if (timeSinceScroll >= quietWindowMs && lastVelocity < velocityThreshold) {
+                        snapToNearest();
                     }
-                } else if (settleTimer) {
-                    clearTimeout(settleTimer);
-                    settleTimer = null;
-                }
-
-                rafId = requestAnimationFrame(trackScroll);
+                }, quietWindowMs);
             };
 
-            const startTracking = () => {
+            const handleScroll = () => {
                 if (!isMobile()) return;
-                if (rafId) return;
+                const now = performance.now();
+                const deltaY = window.scrollY - lastY;
+                const deltaTime = Math.max(1, now - lastTimestamp);
+                lastVelocity = Math.abs(deltaY) / deltaTime;
                 lastY = window.scrollY;
-                rafId = requestAnimationFrame(trackScroll);
+                lastTimestamp = now;
+                lastScrollEventAt = now;
+                requestSettleCheck();
             };
 
             const handleTouchStart = () => {
-                stopTracking();
+                touchActive = true;
+                clearSettleTimer();
             };
 
             const handleTouchEnd = () => {
-                startTracking();
+                touchActive = false;
+                requestSettleCheck();
             };
 
-            window.addEventListener('scroll', () => {
-                if (!isMobile()) {
-                    stopTracking();
-                    return;
-                }
-                startTracking();
-            }, { passive: true });
-
+            window.addEventListener('scroll', handleScroll, { passive: true });
             window.addEventListener('touchstart', handleTouchStart, { passive: true });
             window.addEventListener('touchend', handleTouchEnd, { passive: true });
             window.addEventListener('touchcancel', handleTouchEnd, { passive: true });
             window.addEventListener('resize', () => {
-                stopTracking();
+                clearSettleTimer();
+                snapInProgress = false;
             }, { passive: true });
         }
 
