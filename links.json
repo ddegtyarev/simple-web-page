@@ -24,14 +24,14 @@
     {
       "id": "en-baam",
       "title": "Berlin Artists Art Market (BAAM)",
-      "url": "https://baamberlin.com/artists/mikhail-gulin/",
+      "url": "https://baamberlin.com/artists/#MikhailGulin",
       "description": "Artist profile in Berlin — conceptual artist Mikhail Gulin.",
       "year": null
     },
     {
       "id": "en-variant",
       "title": "Variant.org.uk — 'Belarusian Constellation' (2024–2025)",
-      "url": "https://www.variant.org.uk/articles/belarusian-constellation/",
+      "url": "https://variant.org.uk/article/belarusian-constellation/",
       "description": "Article 'Belarusian Constellation' (28 Dec 2024). Interview with Gulin (25 Mar 2025).",
       "year": 2024
     },
@@ -114,7 +114,7 @@
     {
       "id": "pl-opencity",
       "title": "Open City / Otwarte Miasto (2021)",
-      "url": "https://2021.opencity.pl/mikhail-gulin-jonasz",
+      "url": "https://2021.opencity.pl/program/mikhail-gulin-jonasz/index.html",
       "description": "Projekt: 'Jonasz' (interaktive Installation, 2021). Vollständige Biografie und Beschreibung der Installation.",
       "year": 2021
     },
