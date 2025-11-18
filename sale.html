@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mikhail Gulin — Artworks for Sale</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -57,6 +59,7 @@
             display: flex;
             flex-direction: column;
             gap: 24px;
+            min-height: 60vh;
         }
         .artwork-item {
             background: var(--card);
@@ -185,15 +188,30 @@
     <p>&copy; 2024&dash;2025 Mikhail Gulin. All rights reserved.</p>
 </footer>
 <script>
+    const gallery = document.getElementById('gallery');
+    let artworksCache = [];
+    let currentBreakpoint = getBreakpoint();
+
+    function getBreakpoint() {
+        if (window.innerWidth < 640) return 'small';
+        if (window.innerWidth < 1024) return 'medium';
+        return 'large';
+    }
+
     // Load artworks from JSON
-    async function loadArtworks() {
+    async function loadArtworks({ force = false } = {}) {
         try {
+            if (artworksCache.length && !force) {
+                displayArtworks(artworksCache);
+                return;
+            }
             const response = await fetch('artworks.json');
             const artworks = await response.json();
-            displayArtworks(artworks);
+            artworksCache = artworks;
+            displayArtworks(artworksCache);
         } catch (error) {
             console.error('Error loading artworks:', error);
-            document.getElementById('gallery').innerHTML =
+            gallery.innerHTML =
                 '<div class="loading">Error loading artworks. Please refresh the page.</div>';
         }
     }
@@ -218,8 +236,11 @@
         };
     }
 
-    function displayArtworks(artworks) {
-        const gallery = document.getElementById('gallery');
+    function displayArtworks(artworks, { preserveHeight = false } = {}) {
+        const previousHeight = preserveHeight ? gallery.offsetHeight : 0;
+        if (preserveHeight && previousHeight) {
+            gallery.style.minHeight = `${previousHeight}px`;
+        }
         gallery.innerHTML = '';
 
         artworks.forEach((artwork, index) => {
@@ -482,6 +503,12 @@
 
             gallery.appendChild(artworkItem);
         });
+
+        if (preserveHeight) {
+            requestAnimationFrame(() => {
+                gallery.style.minHeight = '';
+            });
+        }
     }
 
     // Handle window resize to update image sources
@@ -489,8 +516,12 @@
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
-            // Reload artworks to update image sources
-            loadArtworks();
+            const nextBreakpoint = getBreakpoint();
+            if (nextBreakpoint === currentBreakpoint || !artworksCache.length) {
+                return;
+            }
+            currentBreakpoint = nextBreakpoint;
+            displayArtworks(artworksCache, { preserveHeight: true });
         }, 250);
     });
 
