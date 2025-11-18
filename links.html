@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Links — Mikhail Gulin</title>
+    <style>
+      *{box-sizing:border-box}
+      body{
+        font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+        margin:0;
+        padding:0;
+        color:#1a1a1a;
+        background:linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);
+        min-height:100vh;
+      }
+      .container{
+        max-width:1000px;
+        margin:0 auto;
+        padding:24px 20px;
+      }
+      header{
+        background:#fff;
+        padding:32px;
+        border-radius:16px;
+        box-shadow:0 4px 6px rgba(0,0,0,0.07);
+        margin-bottom:32px;
+      }
+      h1{
+        font-size:2rem;
+        margin:0 0 12px 0;
+        color:#2c3e50;
+        font-weight:700;
+      }
+      header p{
+        margin:0;
+        color:#5a6c7d;
+        font-size:1.05rem;
+        line-height:1.6;
+      }
+      #controls{
+        background:#fff;
+        padding:20px 24px;
+        border-radius:12px;
+        box-shadow:0 2px 4px rgba(0,0,0,0.06);
+        margin-bottom:24px;
+        display:flex;
+        align-items:center;
+        gap:16px;
+        flex-wrap:wrap;
+      }
+      #controls strong{
+        color:#2c3e50;
+        font-size:0.95rem;
+      }
+      #lang-buttons{
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+      }
+      .lang-btn{
+        background:#f8f9fa;
+        border:2px solid #e1e8ed;
+        padding:8px 16px;
+        border-radius:8px;
+        cursor:pointer;
+        font-size:1rem;
+        transition:all 0.2s ease;
+        display:flex;
+        align-items:center;
+        gap:6px;
+        color:#495057;
+        font-weight:500;
+      }
+      .lang-btn:hover{
+        background:#e9ecef;
+        border-color:#adb5bd;
+        transform:translateY(-1px);
+      }
+      .lang-btn.selected{
+        background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+        border-color:#667eea;
+        color:#fff;
+        box-shadow:0 4px 8px rgba(102,126,234,0.3);
+      }
+      .lang-btn .vis{
+        display:none;
+      }
+      #entries{
+        display:grid;
+        gap:16px;
+      }
+      .item{
+        background:#fff;
+        padding:24px;
+        border-radius:12px;
+        box-shadow:0 2px 8px rgba(0,0,0,0.08);
+        transition:all 0.3s ease;
+        border-left:4px solid #667eea;
+      }
+      .item:hover{
+        box-shadow:0 8px 16px rgba(0,0,0,0.12);
+        transform:translateY(-2px);
+      }
+      .item h3{
+        margin:0 0 12px 0;
+        font-size:1.15rem;
+        color:#2c3e50;
+        font-weight:600;
+        line-height:1.4;
+      }
+      .meta{
+        color:#5a6c7d;
+        margin:0 0 12px 0;
+        line-height:1.6;
+        font-size:0.95rem;
+      }
+      .item p{
+        margin:0;
+      }
+      .item a{
+        color:#667eea;
+        text-decoration:none;
+        word-break:break-all;
+        font-size:0.9rem;
+        transition:color 0.2s ease;
+      }
+      .item a:hover{
+        color:#764ba2;
+        text-decoration:underline;
+      }
+      .back{
+        margin-top:32px;
+        display:inline-block;
+        background:#fff;
+        padding:12px 24px;
+        border-radius:8px;
+        box-shadow:0 2px 4px rgba(0,0,0,0.06);
+        transition:all 0.2s ease;
+      }
+      .back a{
+        color:#667eea;
+        text-decoration:none;
+        font-weight:500;
+      }
+      .back:hover{
+        box-shadow:0 4px 8px rgba(0,0,0,0.1);
+        transform:translateY(-1px);
+      }
+      @media (min-width:768px){
+        .container{padding:40px 32px}
+        header{padding:40px}
+        h1{font-size:2.5rem}
+        .lang-btn .vis{display:inline}
+        #entries{grid-template-columns:repeat(auto-fill,minmax(450px,1fr))}
+      }
+      @media (max-width:767px){
+        h1{font-size:1.75rem}
+        header{padding:24px}
+        .item{padding:20px}
+        #controls{padding:16px}
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Links & References — Mikhail Gulin</h1>
+        <p>Selected English-language references to media, press and exhibition pages. Each entry includes a short description and a link.</p>
+      </header>
+
+      <main>
+        <div id="controls">
+          <div><strong>Languages:</strong></div>
+          <div id="lang-buttons">
+            <button class="lang-btn selected" data-lang="en" title="English">🇬🇧<span class="vis"> English</span></button>
+            <button class="lang-btn" data-lang="de" title="German">🇩🇪<span class="vis"> German</span></button>
+            <button class="lang-btn" data-lang="nl" title="Dutch">🇳🇱<span class="vis"> Dutch</span></button>
+            <button class="lang-btn" data-lang="pl" title="Polish">🇵🇱<span class="vis"> Polish</span></button>
+          </div>
+        </div>
+
+        <div id="entries">Loading links…</div>
+
+        <p class="back"><a href="/index.html">← Back to home</a></p>
+      </main>
+    </div>
+
+    <script>
+      const entriesEl = document.getElementById('entries');
+      const langButtons = Array.from(document.querySelectorAll('.lang-btn'));
+
+      // Keep track of selected languages (multiple allowed)
+      const selected = new Set(['en']);
+
+      function escapeHtml(s){
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+      }
+
+      function renderCombined(data, langs){
+        if(!langs || langs.length === 0){
+          entriesEl.innerHTML = '<p>Please select one or more languages above.</p>';
+          return;
+        }
+        // Combine lists in the order of langs, deduplicate by id
+        // Track which items are new (not in previous render)
+        const previousIds = window.__previousIds || new Set();
+        const seen = new Set();
+        const combined = [];
+        const newItems = [];
+        const existingItems = [];
+        
+        langs.forEach(lang => {
+          const list = data[lang] || [];
+          list.forEach(item => {
+            if(!seen.has(item.id)){
+              seen.add(item.id);
+              if(previousIds.has(item.id)){
+                existingItems.push(item);
+              } else {
+                newItems.push(item);
+              }
+            }
+          });
+        });
+
+        // Store current IDs for next render
+        window.__previousIds = seen;
+
+        // Put new items first, then existing items
+        const finalList = [...newItems, ...existingItems];
+
+        if(finalList.length === 0){
+          entriesEl.innerHTML = '<p>No links found for the selected languages.</p>';
+          return;
+        }
+
+        entriesEl.innerHTML = finalList.map((it, idx) => {
+          const year = it.year ? (' — ' + it.year) : '';
+          const desc = it.description ? ('<div class="meta">' + escapeHtml(it.description) + '</div>') : '';
+          return '<section class="item">'
+            + '<h3>' + escapeHtml((idx+1) + '. ' + it.title) + year + '</h3>'
+            + desc
+            + '<p><a href="' + escapeHtml(it.url) + '" target="_blank" rel="noopener">' + escapeHtml(it.url) + '</a></p>'
+            + '</section>';
+        }).join('\n');
+      }
+
+      function updateButtons(){
+        langButtons.forEach(btn => {
+          const lang = btn.dataset.lang;
+          if(selected.has(lang)) btn.classList.add('selected'); else btn.classList.remove('selected');
+        });
+      }
+
+      langButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const lang = btn.dataset.lang;
+          if(selected.has(lang)) selected.delete(lang); else selected.add(lang);
+          updateButtons();
+          // Re-render using the loaded data object
+          if(window.__linksData) renderCombined(window.__linksData, Array.from(selected));
+        });
+      });
+
+      // Try fetching the JSON file. If it fails (file://), use embedded fallback.
+      fetch('links.json')
+        .then(r => { if(!r.ok) throw new Error('Network response was not ok'); return r.json(); })
+        .then(data => {
+          window.__linksData = data;
+          renderCombined(data, Array.from(selected));
+        })
+        .catch(err => {
+          console.warn('Could not load links.json:', err);
+          const embedded = document.getElementById('embedded-links');
+          if(embedded){
+            try{
+              const data = JSON.parse(embedded.textContent);
+              window.__linksData = data;
+              renderCombined(data, Array.from(selected));
+              return;
+            }catch(e){
+              console.error('Embedded fallback parse error', e);
+            }
+          }
+          entriesEl.innerHTML = '<p>Unable to load links.json. If you opened this file directly from the filesystem, start a local server for the page to fetch the JSON data. Example:</p>'
+            + '<pre>python3 -m http.server 8000</pre>'
+            + '<p>Then open <code>http://localhost:8000/links.html</code></p>';
+        });
+
+    </script>
+
+    <!-- Embedded fallback JSON for file:// preview (keeps data in one file for easy preview) -->
+    <script id="embedded-links" type="application/json">
+{
+  "en": [
+    {
+      "id": "en-arc-profile",
+      "title": "Artists at Risk Connection (ARC) (2025)",
+      "url": "https://artistsatriskconnection.org/fellows/mikhail-gulin/",
+      "description": "Profile page: full biography, interview; exhibition 'Art of Resistance' (May 2025); interview 'How do you feel as an artist in exile?'",
+      "year": 2025
+    },
+    {
+      "id": "en-arc-exhibition",
+      "title": "ARC — Mikhail Gulin Exhibition (2025)",
+      "url": "https://artistsatriskconnection.org/exhibition/mikhail-gulin-exhibition/",
+      "description": "Exhibition information with works by Mikhail Gulin.",
+      "year": 2025
+    },
+    {
+      "id": "en-mutualart",
+      "title": "MutualArt (2025)",
+      "url": "https://www.mutualart.com/Artist/Mikhail-Gulin/",
+      "description": "Auction platform listing ~13 works; sales history and exhibitions.",
+      "year": 2025
+    },
+    {
+      "id": "en-baam",
+      "title": "Berlin Artists Art Market (BAAM)",
+      "url": "https://baamberlin.com/artists/mikhail-gulin/",
+      "description": "Artist profile in Berlin — conceptual artist Mikhail Gulin.",
+      "year": null
+    },
+    {
+      "id": "en-variant",
+      "title": "Variant.org.uk — 'Belarusian Constellation' (2024–2025)",
+      "url": "https://www.variant.org.uk/articles/belarusian-constellation/",
+      "description": "Article 'Belarusian Constellation' (28 Dec 2024). Interview with Gulin (25 Mar 2025).",
+      "year": 2024
+    },
+    {
+      "id": "en-balticworlds",
+      "title": "Baltic Worlds (journal)",
+      "url": "https://balticworlds.com/",
+      "description": "Article: 'THE SILENCE OF THE PINKCUBES' — an analysis of Gulin's place in Belarusian art.",
+      "year": null
+    },
+    {
+      "id": "en-artplugged",
+      "title": "ArtPlugged UK (2024)",
+      "url": "https://artplugged.co.uk/humanosh-foundation-4th-charity-art-auction/",
+      "description": "Humanosh Foundation 4th charity art auction (20 March 2024).",
+      "year": 2024
+    },
+    {
+      "id": "en-untietotie",
+      "title": "Once We Were Trees, Now We Are Birds (2025)",
+      "url": "https://untietotie.org/",
+      "description": "Exhibition at ifa Gallery Berlin (21 Feb – 8 Jun 2025). ~50 participants including Gulin.",
+      "year": 2025
+    },
+    {
+      "id": "en-thibaut",
+      "title": "Thibaut de Ruyter (2025)",
+      "url": "https://thibautderuyter.com/2025-once-we-were-trees-now-we-are-birds/",
+      "description": "Detailed information about the exhibition and project.",
+      "year": 2025
+    },
+    {
+      "id": "en-personal-site",
+      "title": "Mikhail Gulin — Personal Website",
+      "url": "https://mikhailgulin.com/",
+      "description": "Official portfolio and artist website.",
+      "year": null
+    },
+    {
+      "id": "en-onebid",
+      "title": "OneBid (English)",
+      "url": "https://one.bid/en/artist/mikhail-gulin",
+      "description": "Auction results and listings.",
+      "year": null
+    }
+  ],
+  "de": [
+    {
+      "id": "de-japanisches-palais",
+      "title": "Japanisches Palais Dresden (2023)",
+      "url": "https://japanisches-palais.skd.museum/en/exhibitions/cafe-belarus-ii-kassandra-komplex/",
+      "description": "Ausstellung: 'Café Belarus II: Cassandra Complex' (8 Sep – 23 Nov 2023). Duo: Mikhail Gulin & Antanina Slabodchykava (1+1=1).",
+      "year": 2023
+    },
+    {
+      "id": "de-skd-press",
+      "title": "Staatliche Kunstsammlungen Dresden (SKD) (2023)",
+      "url": "https://www.skd.museum/en/about-us/press/",
+      "description": "Pressemitteilungen und offizielle Informationen zur Ausstellung.",
+      "year": 2023
+    },
+    {
+      "id": "de-diesachsen",
+      "title": "Die Sachsen (2023)",
+      "url": "https://www.diesachsen.de/modern-art-from-the-dictatorship-in-dresden-cafe-belarus/",
+      "description": "Artikel: 'Modern art from the dictatorship in Dresden Café Belarus' (6 Sep 2023).",
+      "year": 2023
+    },
+    {
+      "id": "de-hau",
+      "title": "Hebbel am Ufer, Berlin",
+      "url": "https://www.hebbel-am-ufer.de/",
+      "description": "Informationen zum künstlerischen Duo 1+1=1.",
+      "year": null
+    }
+  ],
+  "nl": [
+    {
+      "id": "nl-cova",
+      "title": "Cova Art Gallery, Eindhoven (2018-2022)",
+      "url": "https://covagallery.nl/references/mikhail-gulin/",
+      "description": "Galerie: Vertreter des Künstlers in den Niederlanden. Ausstellung: '100% Masculine' (2018). Vollständiger niederländischer Text mit Analyse.",
+      "year": null
+    }
+  ],
+  "pl": [
+    {
+      "id": "pl-opencity",
+      "title": "Open City / Otwarte Miasto (2021)",
+      "url": "https://2021.opencity.pl/mikhail-gulin-jonasz",
+      "description": "Projekt: 'Jonasz' (interaktive Installation, 2021). Vollständige Biografie und Beschreibung der Installation.",
+      "year": 2021
+    },
+    {
+      "id": "pl-onebidpl",
+      "title": "OneBid.pl (2023, 2021)",
+      "url": "https://onebid.pl/en/artist/mikhail-gulin/",
+      "description": "Spezialisierte Auktionsplattform mit Beschreibungen der Arbeiten. Beispiele: 'Incydent w Parku Jurajskim' (2014), 'Dziewczyna z nieogoloną pachą' (2015).",
+      "year": null
+    },
+    {
+      "id": "pl-zwierciadlo",
+      "title": "Zwierciadło.pl (2022)",
+      "url": "https://zwierciadlo.pl/sztuka-dla-bialorusi/",
+      "description": "Artikel: 'Sztuka dla Białorusi' — Benefizauktion zur Unterstützung belarussischer Geflüchteter in Warschau. Erwähnung: Gulins Werke wurden am 9. Feb 2022 gespendet.",
+      "year": 2022
+    },
+    {
+      "id": "pl-neweast",
+      "title": "Nowa Europa Wschodnia (2025)",
+      "url": "https://new.org.pl/artykuly/represje-rany-i-krew",
+      "description": "Artikel: 'Represje, rany i krew' — Bericht über die Verhaftung Gulins wegen des Projekts 'Personal monument' (2012).",
+      "year": 2025
+    },
+    {
+      "id": "pl-artluk",
+      "title": "ArtLuk.com (2010)",
+      "url": "https://artluk.com/sztuka-wspolczesna/",
+      "description": "Artikel: 'Sztuka współczesna w 'kraju bez galerii', czyli Białoruś' — Erwähnung von Gulins 'Untitled (triptych)' (2009).",
+      "year": 2010
+    },
+    {
+      "id": "pl-szum",
+      "title": "Szum Magazine (2016)",
+      "url": "https://magazynszum.pl/top-10-art-in-central-and-eastern-europe-2016/",
+      "description": "Artikel: 'TOP 10: Art in Central and Eastern Europe 2016' — Erwähnung der Teilnahme an '10 Artists' Workshops' in Minsk.",
+      "year": 2016
+    },
+    {
+      "id": "pl-galeria-zoya",
+      "title": "Galeria ZOYA, Warszawa (2008)",
+      "url": "https://bellabelarus.com/project-k-r-r-by-emerging-belarusian-artists/",
+      "description": "Projekt: 'K-R-R' (Aug 2008). Mitwirkende: Antanina Slobodchikova. Ort: ZOYA Gallery, Warszawa.",
+      "year": 2008
+    }
+  ]
+}
+    </script>
+  </body>
+</html>
